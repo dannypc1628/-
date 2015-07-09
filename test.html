@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>測試文件</title>
+	<meta charset="UTF-8">
+
+	<style type="text/css">
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbhEc4uTXbChgqAGn3qMZOFGrmoqVJOrw">
+    </script>
+    <!--<script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat: 25.0607, lng: 121.531},
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+-->
+
+<script type="text/javascript">
+function initialize() {
+
+  // Create an array of styles.
+  var styles = [
+    {
+      stylers: [
+        { hue: "#00ffe6" },
+        { saturation: -80 }
+      ]
+    },{
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        { lightness: 50 },
+        { visibility: "simplified" }
+      ]
+    },{
+      featureType: "road",
+      elementType: "labels",
+
+      stylers: [
+        { visibility: "off" }
+      ]
+    }
+  ];
+
+  // Create a new StyledMapType object, passing it the array of styles,
+  // as well as the name to be displayed on the map type control.
+  var styledMap = new google.maps.StyledMapType(styles,
+    {name: "Styled Map"});
+
+  // Create a map object, and include the MapTypeId to add
+  // to the map type control.
+  var mapOptions = {
+    zoom: 17,
+    center: new google.maps.LatLng(25.06079047579272, 121.53120506931151),
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+    }
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
+
+  //Associate the styled map with the MapTypeId and set it to display.
+  map.mapTypes.set('map_style', styledMap);
+  map.setMapTypeId('map_style');
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+	
+</head>
+
+<body>
+	
+	<div id="map-canvas" ></div>
+	<p>google地圖嵌入<p>
+	<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14456.849445496875!2d121.53120506931151!3d25.06079047579272!3m2!1i1024!2i768!4f13.1!5e0!3m2!1szh-TW!2stw!4v1436190563044" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+	<p>測試google maps api</p>
+
+
+</body>
+</html>

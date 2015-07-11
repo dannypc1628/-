@@ -15,7 +15,7 @@
    
  <!--定位範例程式-->
 <script type="text/javascript">
-
+var x=document.getElementById("demo");
 function getLocation()
       {
       if (navigator.geolocation)
@@ -24,10 +24,11 @@ function getLocation()
         }
       else{x.innerHTML="Geolocation is not supported by this browser.";}
       }
-    function showPosition(position)
+function showPosition(position)
       {
         //經度緯度
-      latlon=position.coords.latitude+","+position.coords.longitude;
+      lat=position.coords.latitude;
+      lon=position.coords.longitude;
   }
 
 function initialize() {
@@ -76,7 +77,7 @@ function initialize() {
   // to the map type control.
   var mapOptions = {
     zoom: 17,
-    center: new google.maps.LatLng(latlon),//經度緯度
+    center: new google.maps.LatLng(lat,lon),//經度緯度
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }

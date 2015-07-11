@@ -7,25 +7,28 @@
 	<style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
+    <!--Google地圖金鑰-->
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbhEc4uTXbChgqAGn3qMZOFGrmoqVJOrw">
     </script>
-    <!--<script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: { lat: 25.0607, lng: 121.531},
-          zoom: 12,
-          mapTypeId: google.maps.MapTypeId.TERRAIN
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
--->
+    <!--定位範例城市-->
+    <script>
+    
+  }
+</script>
 
 <script type="text/javascript">
-function initialize() {
+var x=document.getElementById("demo");
+    function getLocation()
+      {
+      if (navigator.geolocation)
+        {
+        navigator.geolocation.getCurrentPosition(initialize);
+        }
+      else{x.innerHTML="Geolocation is not supported by this browser.";}
+      }
+    
+function initialize(position) {
 
   // Create an array of styles.
   var styles = [
@@ -71,7 +74,7 @@ function initialize() {
   // to the map type control.
   var mapOptions = {
     zoom: 17,
-    center: new google.maps.LatLng(25.06079047579272, 121.53120506931151),
+    center: new google.maps.LatLng(position.coords.latitude ,position.coords.longitude),
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }

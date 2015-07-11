@@ -14,11 +14,6 @@
     <!--定位範例城市-->
     <script>
     
-  }
-</script>
-
-<script type="text/javascript">
-var x=document.getElementById("demo");
     function getLocation()
       {
       if (navigator.geolocation)
@@ -27,8 +22,30 @@ var x=document.getElementById("demo");
         }
       else{x.innerHTML="Geolocation is not supported by this browser.";}
       }
-    
-function initialize(position) {
+    function showPosition(position)
+      {
+      x.innerHTML="Latitude: " + position.coords.latitude +
+      "<br />Longitude: " + position.coords.longitude;
+  }
+</script>
+
+<script type="text/javascript">
+var latlon ;
+
+function getLocation()
+      {
+      if (navigator.geolocation)
+        {
+        navigator.geolocation.getCurrentPosition(initialize);
+        }
+      else{x.innerHTML="Geolocation is not supported by this browser.";}
+      }
+    function showPosition(position)
+      {
+      latlon=position.coords.latitude+","+position.coords.longitude;
+  }
+
+function initialize() {
 
   // Create an array of styles.
   var styles = [
@@ -74,7 +91,7 @@ function initialize(position) {
   // to the map type control.
   var mapOptions = {
     zoom: 17,
-    center: new google.maps.LatLng(position.coords.latitude ,position.coords.longitude),
+    center: new google.maps.LatLng(latlon),
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }

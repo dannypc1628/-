@@ -11,37 +11,22 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbhEc4uTXbChgqAGn3qMZOFGrmoqVJOrw">
     </script>
-    <!--定位範例城市-->
-    <script>
-    
-    function getLocation()
-      {
-      if (navigator.geolocation)
-        {
-        navigator.geolocation.getCurrentPosition(initialize);
-        }
-      else{x.innerHTML="Geolocation is not supported by this browser.";}
-      }
-    function showPosition(position)
-      {
-      x.innerHTML="Latitude: " + position.coords.latitude +
-      "<br />Longitude: " + position.coords.longitude;
-  }
-</script>
-
+   
+   
+ <!--定位範例程式-->
 <script type="text/javascript">
-var latlon ;
 
 function getLocation()
       {
       if (navigator.geolocation)
         {
-        navigator.geolocation.getCurrentPosition(initialize);
+        navigator.geolocation.getCurrentPosition(showPosition);
         }
       else{x.innerHTML="Geolocation is not supported by this browser.";}
       }
     function showPosition(position)
       {
+        //經度緯度
       latlon=position.coords.latitude+","+position.coords.longitude;
   }
 
@@ -91,7 +76,7 @@ function initialize() {
   // to the map type control.
   var mapOptions = {
     zoom: 17,
-    center: new google.maps.LatLng(latlon),
+    center: new google.maps.LatLng(latlon),//經度緯度
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }

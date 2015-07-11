@@ -32,17 +32,28 @@ function initialize() {
     {
       stylers: [
         { hue: "#00ffe6" },
-        { saturation: -80 }
+        { saturation: -80 },
+        {gamma:0.4}
       ]
-    },{
+    },
+    {
+      featureType:"road",
+      elementType:"geometry.stroke",
+      stylers:[
+        {lightness:70}
+      ]
+    },
+    {
       featureType: "road",
-      elementType: "geometry",
+      elementType: "geometry.fill",
       stylers: [
-        { lightness: 50 },
-        { visibility: "simplified" }
+      
+        { visibility: "off" }
       ]
-    },{
-      featureType: "road",
+    },
+    
+    {
+      featureType: "all",
       elementType: "labels",
 
       stylers: [
@@ -79,11 +90,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </head>
 
 <body>
-	
+	<p>google地圖嵌入1<p>
 	<div id="map-canvas" ></div>
-	<p>google地圖嵌入<p>
-	<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14456.849445496875!2d121.53120506931151!3d25.06079047579272!3m2!1i1024!2i768!4f13.1!5e0!3m2!1szh-TW!2stw!4v1436190563044" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-	<p>測試google maps api</p>
+	<p>google地圖嵌入2<p>
+	<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14456.849445496875!2d121.53120506931151!3d25.06079047579272!3m2!1i1024!2i768!4f13.1!5e0!3m2!1szh-TW!2stw!4v1436190563044" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+	
 
 
 </body>

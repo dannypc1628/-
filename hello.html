@@ -3,6 +3,24 @@
 <head>
 	<title>歡迎來到</title>
 	<meta charset="UTF-8">
+
+	<script type="text/javascript">
+
+		function loadXMLDoc()
+		{
+		var xmlhttp;
+		if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+  			xmlhttp=new XMLHttpRequest();
+  		}
+		else{// code for IE6, IE5
+  			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  		}
+
+		xmlhttp.open("GET","/ajax/demo_get2.asp?fname=Bill&lname=Gates",true);
+		xmlhttp.send();
+		}
+</script>
+
 </head>
 
 <body>
@@ -12,7 +30,8 @@
 	<br>
 	密碼：<input type="text" name="password">
 	<br>
-	<input type="submit" value="送出">
+	<input type="submit" value="送出" onclick="loadXMLDoc()">
+	<button type="button" onclick="loadXMLDoc()">登入</button>
 </form>
 
 </body>

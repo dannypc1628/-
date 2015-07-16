@@ -85,10 +85,10 @@ function initialize() {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
-      var infowindow = new google.maps.InfoWindow({
+      var maker = new google.maps.Marker({
         map: map,
         position: pos,
-        content: 'Location found using HTML5.'
+        title: 'Location found using HTML5.'
       });
 
       map.setCenter(pos);

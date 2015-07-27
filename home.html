@@ -2,10 +2,51 @@
 <head>
 	<title>首頁</title>
 	<meta charset="UTF-8">
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		//userdata({"userName": "123", "status": "201", "session": "Xt4nv78kCXcA8eMNFg9ICRahqs9suTJQ"});
+
+		function check(){
+			if(loginForm.username.value==""){
+				alert("不可以空白");
+			}
+			else{
+				login();
+			}
+
+		}
+
+		function login(){
+			var userName = loginForm.username.value;
+			var serverUrl = "http://140.136.150.71:20003/user/add"; 
+			alert(userName);
+			$.ajax({
+				type:"GET",
+				url:serverUrl,
+				data:"username="+userName,
+				dataType:"JSONP",
+				jsonpCallback:"userdata",
+				success:function(rData){
+					alert('新會員 '+rData.userName+' 您好');
+				},
+			});
+		}
+
+
+	</script>
+
 </head>
 
 <body>
-	<div>
+	<div id="login">
+		<form name="loginForm">
+			<input name="username"  type="text" value="">
+			<button type="button" onclick="check()">登入</button>
+		</form>
+
+	</div>
+
+	<div id="home">
 		<p>地圖</p>
 			<button onclick="location.href='test.html'">進入地圖</button>
 	</div>

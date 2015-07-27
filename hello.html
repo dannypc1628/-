@@ -79,14 +79,15 @@
 </script>
 -->
 <script type="text/javascript">
-		function sendMessage(userName,password){
-			 var serverUrl="http://140.136.150.71:20003/user/add?username=";
+		function sendMessage(){
+			 var userName = $('#userName').val();
+			 var serverUrl="http://140.136.150.71:20003/user/add?username="+userName;
           
             $.ajax({
                 url: serverUrl,
                 data: $('#sentToBack').serialize(),
                 type:"GET",
-                dataType:'jsonp',
+                dataType:'text',
 
                 success: function(msg){
                     alert(msg);
@@ -103,19 +104,26 @@
 
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#b01").click(function(){
+  htmlobj=$.ajax({url:"http://www.pureexample.com/backend/ajax_crossdomain.aspx",async:false});
+  $("#myDiv").html(htmlobj.responseText);
+  });
+});
+</script>
 </head>
 
 <body>
 
-<form>
-	帳號：<input type="text" name="userName">
+<form action="http://140.136.150.71:20003/user/add" method="get">
+	帳號：<input type="text" name="username" >
 	<br>
-	密碼：<input type="text" name="password">
-	<br>
-	<input type="submit" value="送出" onclick="sendMessage()">
+	
+	<input type="submit" value="送出" >
 	<button type="button" onclick="sendMessage()">登入</button>
-	<button type="button" >送出測試</button>
--->
+	<button type="button" id="b01" >送出測試</button>
+<!--onclick="sendMessage()"-->
 </form>
 
 <div id="myDiv"></div>
@@ -123,17 +131,17 @@
 <script type="text/javascript">
 $(document).ready(function (){
     $("#btn392").click(function(){                
-        var url = "http://www.pureexample.com/backend/ajax_crossdomain.aspx";
+        var url = "http://140.136.150.71:20003/user/add";
          
         var success = function(data){
             var html = [];
             /* parse JSON */
             data = $.parseJSON(data);
             /* loop through array */
-            $.each(data, function(index, d){            
-                html.push("Manufacturer : ", d.Manufacturer, ", ",
-                          "Sold : ", d.Sold, ", ", 
-                          "Month : ", d.Month, "<br>");
+            $.each(data, function(index, one){            
+                html.push("userName: ", one[1], ", ",
+                          "status: ", one[2], ", ", 
+                          "Month : ", one[3], "<br>");
             });
  
             $("#div391").html(html.join('')).css("background-color", "orange");

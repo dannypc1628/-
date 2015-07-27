@@ -3,23 +3,59 @@
 	<title>首頁</title>
 	<meta charset="UTF-8">
 	<script src="js/jquery.min.js"></script>
+
 	<script type="text/javascript">
 		//userdata({"userName": "123", "status": "201", "session": "Xt4nv78kCXcA8eMNFg9ICRahqs9suTJQ"});
+		$(document).ready(function() {
+			$("#home").hide();
+			//$("topBar").hide();
+			if(localStorage.loginCount>=1){//如果登入次數大於一就顯示帳號
+				loginForm.username.value=localStorage.userName;
+			}
+			else{
+				localStorage.loginCount=0;
+			}
+
+			if (localStorage.pageCount>=1){
+		  		localStorage.pageCount=Number(localStorage.pageCount) +1;
+		  		
+		  	}
+			else{
+			 localStorage.pageCount=1;
+			 }
+			 //document.write("您第 "+ localStorage.pageCount + " 次來到這裡.");
+			 //document.write("您登入次數= "+ localStorage.loginCount );
+			 $("#topBar").html("您第 "+ localStorage.pageCount + " 次來到這裡，您登入次數="+ localStorage.loginCount );
+		});
+
+		
+		
+		function clearLocalStorage(){
+			localStorage.clear();
+ 
+ 			$("topBar").innerHTML = "全部数据已经清除";
+		}
 
 		function check(){
+
 			if(loginForm.username.value==""){
 				alert("不可以空白");
 			}
-			else{
-				login();
+			else if (localStorage.loginCount>=1){//登入次數大於一就是老會員
+		  		localStorage.loginCount=Number(localStorage.loginCount) +1;
+		  		login();
+		  	}
+			else{//否則就是新會員
+				localStorage.loginCount=1;
+			 	loginAddNewUser();
 			}
-
+			
 		}
 
-		function login(){
+		function loginAddNewUser(){
 			var userName = loginForm.username.value;
 			var serverUrl = "http://140.136.150.71:20003/user/add"; 
-			alert(userName);
+			
 			$.ajax({
 				type:"GET",
 				url:serverUrl,
@@ -28,6 +64,33 @@
 				jsonpCallback:"userdata",
 				success:function(rData){
 					alert('新會員 '+rData.userName+' 您好');
+					$('#login').hide();
+					$('#home').fadeIn(); 
+					$('#topBar').fadeIn()
+					$("#topBar").html("<b>Hello "+rData.userName+"</b>"); 
+					localStorage.session=rData.session;
+					localStorage.userName=rData.userName; 
+				},
+			});
+		}
+
+		function login(){
+			var userName = loginForm.username.value;
+			var serverUrl = "http://140.136.150.71:20003/user/login"; 
+			
+			$.ajax({
+				type:"GET",
+				url:serverUrl,
+				data:"session="+localStorage.session,
+				dataType:"JSONP",
+				jsonpCallback:"loginstat",
+				success:function(rData){
+					alert('登入成功\n會員 '+localStorage.userName+' 您好');
+					$('#login').hide();
+					$('#home').fadeIn(); 
+					$('#topBar').fadeIn()
+					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");
+					localStorage.userId=rData.uid; 
 				},
 			});
 		}
@@ -38,6 +101,10 @@
 </head>
 
 <body>
+	<div id="topBar"></div>
+
+
+
 	<div id="login">
 		<form name="loginForm">
 			<input name="username"  type="text" value="">
@@ -45,8 +112,13 @@
 		</form>
 
 	</div>
-
-	<div id="home">
+	<div> 
+		<button id="clearLocalStorage" onclick="clearLocalStorage()">清除本地資料</button>
+	</div>
+	
+	
+	
+	<div id="home" >
 		<p>地圖</p>
 			<button onclick="location.href='test.html'">進入地圖</button>
 	</div>

@@ -79,8 +79,10 @@
 </script>
 -->
 <script type="text/javascript">
-		function sendMessage(userName,password){
-			 var serverUrl="http://140.136.150.71:20003/user/add?username=";
+		function sendMessage(){
+			 var userName = $('#userName').val;
+			 var stringUrl="http://140.136.150.71:20003/user/add?username="+userName;
+			 var serverUrl=stringUrl;
           
             $.ajax({
                 url: serverUrl,
@@ -107,15 +109,15 @@
 
 <body>
 
-<form>
-	帳號：<input type="text" name="userName">
+<form action=>
+	帳號：<input type="text" name="userName" id="userName">
 	<br>
-	密碼：<input type="text" name="password">
+	密碼：<input type="text" name="password" id="password">
 	<br>
 	<input type="submit" value="送出" onclick="sendMessage()">
-	<button type="button" onclick="sendMessage()">登入</button>
+	<button type="button" onclick="sendMessage(userName,password)">登入</button>
 	<button type="button" >送出測試</button>
--->
+
 </form>
 
 <div id="myDiv"></div>

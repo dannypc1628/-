@@ -4,38 +4,43 @@
 	<meta charset="UTF-8">
 	<script src="js/jquery.min.js"></script>
 
+	<!--javaScript 來進行幕後處理-->
 	<script type="text/javascript">
+		//
 		//userdata({"userName": "123", "status": "201", "session": "Xt4nv78kCXcA8eMNFg9ICRahqs9suTJQ"});
+		
+
+		//在還沒有完全載入這個網頁時，先執行這段程式碼
 		$(document).ready(function() {
-			$("#home").hide();
-			//$("topBar").hide();
-			if(localStorage.loginCount>=1){//如果登入次數大於一就顯示帳號
+			$("#home").hide(); //隱藏首頁
+			
+			if(localStorage.loginCount>=1){//如果登入次數大於一就顯示使用者名稱
 				loginForm.username.value=localStorage.userName;
 			}
-			else{
+			else{//沒有的話就使用本地儲存，變數名稱loginCount
 				localStorage.loginCount=0;
 			}
 
-			if (localStorage.pageCount>=1){
+			if (localStorage.pageCount>=1){//如果登入次數大於等於一就加一
 		  		localStorage.pageCount=Number(localStorage.pageCount) +1;
 		  		
 		  	}
-			else{
+			else{//你懂的
 			 localStorage.pageCount=1;
 			 }
-			 //document.write("您第 "+ localStorage.pageCount + " 次來到這裡.");
-			 //document.write("您登入次數= "+ localStorage.loginCount );
+			 //在#topBar顯示
 			 $("#topBar").html("您第 "+ localStorage.pageCount + " 次來到這裡，您登入次數="+ localStorage.loginCount );
 		});
 
 		
-		
+		//清除本地儲存的所有資料
 		function clearLocalStorage(){
 			localStorage.clear();
  
  			$("topBar").innerHTML = "全部数据已经清除";
 		}
 
+		//當使用者按了登入後所作的處理
 		function check(){
 
 			if(loginForm.username.value==""){
@@ -43,15 +48,16 @@
 			}
 			else if (localStorage.loginCount>=1){//登入次數大於一就是老會員
 		  		localStorage.loginCount=Number(localStorage.loginCount) +1;
-		  		login();
+		  		login();//執行登入
 		  	}
 			else{//否則就是新會員
 				localStorage.loginCount=1;
-			 	loginAddNewUser();
+			 	loginAddNewUser();//執行新增會員
 			}
 			
 		}
 
+		//新增會員
 		function loginAddNewUser(){
 			var userName = loginForm.username.value;
 			var serverUrl = "http://140.136.150.71:20003/user/add"; 
@@ -74,6 +80,7 @@
 			});
 		}
 
+		//登入
 		function login(){
 			var userName = loginForm.username.value;
 			var serverUrl = "http://140.136.150.71:20003/user/login"; 
@@ -112,11 +119,10 @@
 		</form>
 
 	</div>
+	
 	<div> 
 		<button id="clearLocalStorage" onclick="clearLocalStorage()">清除本地資料</button>
 	</div>
-	
-	
 	
 	<div id="home" >
 		<p>地圖</p>

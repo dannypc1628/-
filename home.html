@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>首頁</title>
 	<meta charset="UTF-8">
+	<!--使用jQuery來與伺服器溝通-->
 	<script src="js/jquery.min.js"></script>
 
 	<!--javaScript 來進行幕後處理-->
@@ -68,14 +70,14 @@
 				data:"username="+userName,
 				dataType:"JSONP",
 				jsonpCallback:"userdata",
-				success:function(rData){
-					alert('新會員 '+rData.userName+' 您好');
+				success:function(returnData){
+					alert('新會員 '+returnData.userName+' 您好');
 					$('#login').hide();
 					$('#home').fadeIn(); 
 					$('#topBar').fadeIn()
-					$("#topBar").html("<b>Hello "+rData.userName+"</b>"); 
-					localStorage.session=rData.session;
-					localStorage.userName=rData.userName; 
+					$("#topBar").html("<b>Hello "+returnData.userName+"</b>"); 
+					localStorage.session=returnData.session;
+					localStorage.userName=returnData.userName; 
 				},
 			});
 		}
@@ -91,13 +93,13 @@
 				data:"session="+localStorage.session,
 				dataType:"JSONP",
 				jsonpCallback:"loginstat",
-				success:function(rData){
+				success:function(returnData){
 					alert('登入成功\n會員 '+localStorage.userName+' 您好');
 					$('#login').hide();
 					$('#home').fadeIn(); 
 					$('#topBar').fadeIn()
 					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");
-					localStorage.userId=rData.uid; 
+					localStorage.userId=returnData.uid; 
 				},
 			});
 		}
@@ -126,7 +128,7 @@
 	
 	<div id="home" >
 		<p>地圖</p>
-			<button onclick="location.href='test.html'">進入地圖</button>
+			<button onclick="location.href='testMap.html'">進入地圖</button>
 	</div>
 
 </body>

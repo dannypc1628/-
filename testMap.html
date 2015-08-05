@@ -119,31 +119,39 @@ function initialize() {
 				dataType:"JSONP",
 				jsonpCallback:"mPosition",
 				success:function(returnData){
-					var monsterData = returnData.data;
-					var monsterDataLength = monsterData.length
-					beaches = [];//清空		
-					var beachesTemp=[];
-					for (var i = 0; i<monsterDataLength; i++) {
-						beachesTemp=[];
-						beachesTemp.push(monsterData[i]["name"]);
-						beachesTemp.push(monsterData[i]["lat"]);
-						beachesTemp.push(monsterData[i]["lon"]);
-						beachesTemp.push(i);
-						beaches.push(beachesTemp);
-					};
-
-					/* 做成字串處理......，用Array才對
-					for(var i = 0 ; i<monsterDataLength ;i++){
-						if(i>0){
-							beaches = beaches +"," ;
+					if(returnData.status=="205"){
+						var monsterData = returnData.data;
+						beaches =[];	
+						var beachesTemp=[];
+						for (var i = 0; i<monsterData.length; i++) {
+							beachesTemp=[];
+							beachesTemp.push(monsterData[i]["name"]);
+							beachesTemp.push(monsterData[i]["lat"]);
+							beachesTemp.push(monsterData[i]["lon"]);
+							beachesTemp.push(i);
+							beaches.push(beachesTemp);
 						}
-						beaches = beaches+"['"+monsterData[i]["name"]+"', "+monsterData[i]["lon"]+", "+monsterData[i]["lat"]+", "+i+"]";
+
+						/* 做成字串處理......，用Array才對
+						for(var i = 0 ; i<monsterDataLength ;i++){
+							if(i>0){
+								beaches = beaches +"," ;
+							}
+							beaches = beaches+"['"+monsterData[i]["name"]+"', "+monsterData[i]["lon"]+", "+monsterData[i]["lat"]+", "+i+"]";
+						}
+						beaches = beaches +" ]";
+						*/
+						$("#topBar").html("<b>成功收到資料 "+beaches+" </b>");
+						
 					}
-					beaches = beaches +" ]";
-					*/
-					$("#topBar").html("<b>資料 "+beaches+" </b>");
-								
-				},
+					else if(returnData.status=="404"){
+						$("#topBar").html("<b>收到的訊息是：這附近沒有怪物</b>");
+					}
+					else{
+						$("#topBar").html("<b>失敗。 錯誤代碼 = "+returnData.status+" 錯誤訊息="+returnData.msg+" </b>");
+					}
+
+				}
 			});
 		}
 
@@ -182,7 +190,10 @@ function setMarkers(map,locations){
     google.maps.event.addListener(marker, 'click' , function(){
     	infowindow.open(map,marker);
     });
+
+
   }
+
 }
 /*
 var beachesTest = [

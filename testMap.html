@@ -150,13 +150,14 @@ function initialize() {
 function setMarkers(map,locations){
 
     var image = {
-    url: 'img/monster01.png',
+    url: 'img/monster05.png',
     // This marker is 20 pixels wide by 32 pixels tall.
-    size: new google.maps.Size(135,129),
+    size: new google.maps.Size(589,568),
+    scaledSize: new google.maps.Size(117,113),
     // The origin for this image is 0,0.
     origin: new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(0, 32)
+    anchor: new google.maps.Point(50, 50)
   };
 
     for (var i = 0; i < locations.length; i++) {

@@ -132,7 +132,7 @@ function initialize() {
 						beaches.push(beachesTemp);
 					};
 
-					/* 做成字串處理......
+					/* 做成字串處理......，用Array才對
 					for(var i = 0 ; i<monsterDataLength ;i++){
 						if(i>0){
 							beaches = beaches +"," ;
@@ -150,7 +150,7 @@ function initialize() {
 function setMarkers(map,locations){
 
     var image = {
-    url: 'img/mapMonsterIcon.png',
+    url: 'img/monster01.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(20, 32),
     // The origin for this image is 0,0.

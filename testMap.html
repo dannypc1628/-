@@ -163,15 +163,25 @@ function setMarkers(map,locations){
     for (var i = 0; i < locations.length; i++) {
     var beach = locations[i];
     var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+    
+
+    var infowindow =new google.maps.InfoWindow({
+    	content:"<p>怪物名稱"+beach[0]+"</p>",
+    	position:myLatLng
+    });
+
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
         icon: image,
-        
+        anchorPoint:new google.maps.Point(0,0),
         title: beach[0],
         zIndex: beach[3]
     });
 
+    google.maps.event.addListener(marker, 'click' , function(){
+    	infowindow.open(map,marker);
+    });
   }
 }
 /*

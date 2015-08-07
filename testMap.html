@@ -79,25 +79,39 @@ function initialize() {
    map.mapTypes.set('map_style', styledMap);
   map.setMapTypeId('map_style');
 
+  //計算GPS定位次數
+  var gpsRunTime = 0;
   // Try HTML5 geolocation
+  var userPositionMarker;
   if(navigator.geolocation) {
-
+  	//即時定位navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
     navigator.geolocation.watchPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
+      if(gpsRunTime>0)//清除舊的使用者位置
+      	userPositionMarker.setMap(null);
 
-      var maker = new google.maps.Marker({
+      gpsRunTime++;
+
+      userPositionMarker = new google.maps.Marker({
         map: map,
         position: pos,
         title: 'Location found using HTML5.'
       });
       
+      //拿怪物資料
       getMonster(position.coords.latitude,position.coords.longitude);
       map.setCenter(pos);
-      setMarkers(map,beaches);
+      setMonsterMarkers(map,beaches);
     }, function() {
       handleNoGeolocation(true);
-    });
+    }, gps_options = {
+    	//enableHighAccuracy: true, 
+  		maximumAge        : 4000 //間隔時間(毫秒) 
+  		//timeout           : 27000
+    }
+
+    );
   } else {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
@@ -155,7 +169,7 @@ function initialize() {
 			});
 		}
 
-function setMarkers(map,locations){
+function setMonsterMarkers(map,locations){
 
     var image = {
     url: 'img/monster05.png',

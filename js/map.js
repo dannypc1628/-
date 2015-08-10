@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>testMap</title>
-	<meta charset="UTF-8">
-	<script src="js/jquery.min.js"></script>
-	<style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
-    </style>
-    <!--Google地圖金鑰-->
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbhEc4uTXbChgqAGn3qMZOFGrmoqVJOrw">
-    </script>
-   
-   
- <!--定位範例程式-->
-<script type="text/javascript">
+
+
 
 var initialLocation;
 var taipei = new google.maps.LatLng(25.06079047579272, 121.53120506931151);
@@ -252,13 +237,3 @@ google.maps.event.addDomListener(window, 'load', initialize);
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 */
-</script>
-
-
-
-</head>
-<body>
-	<div id = "topBar">topBar</div>
-	<div id="map-canvas" ></div>
-</body>
-</html>

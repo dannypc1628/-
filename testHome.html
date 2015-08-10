@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首頁</title>
+	<meta charset="UTF-8">
+	<!--使用jQuery來與伺服器溝通-->
+	<script src="js/jquery.min.js"></script>
+
+	<!--javaScript 來進行幕後處理-->
+	<script src="js/home.js"></script>
+
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbhEc4uTXbChgqAGn3qMZOFGrmoqVJOrw">
+    </script>
+
+    <script src="js/map.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="css/homeStyle.css"/>
+
+
+
+</head>
+
+<body>
+	<div id="login">
+		<form name="loginForm">
+			<input name="username"  type="text" value="">
+			<button type="button" onclick="check()">登入</button>
+		</form>
+	</div>
+
+	<div id="topBar"></div>
+	
+	<div> 
+		<button id="clearLocalStorage" onclick="clearLocalStorage()">清除本地資料</button>
+	</div>
+	
+	<div id="home" >
+		<div id="contralBar">
+			<span>
+				<p>地圖</p>
+				<button onclick="$("#home").hide();">地圖</button>
+			</span>	
+			
+			<span>
+				<p>背包</p>
+				<button onclick="location.href='testMap.html'">背包</button>
+			</span>
+
+			<span>
+				<p>圖鑑</p>
+				<button onclick="location.href='testMap.html'">圖鑑</button>
+			</span>
+
+			<span>
+				<p>好友</p>
+				<button onclick="location.href='testMap.html'">好友</button>
+			</span>	
+		</div>
+	
+		<div id="view"></div>
+	</div>
+
+	<div id="map-canvas"></div>
+
+</body>
+
+</html>

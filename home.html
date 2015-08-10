@@ -39,7 +39,7 @@
 		function clearLocalStorage(){
 			localStorage.clear();
  
- 			$("topBar").innerHTML = "全部数据已经清除";
+ 			 document.getElementById("topBar").innerHTML="暫存資料已經清除";
 		}
 
 		//當使用者按了登入後所作的處理
@@ -58,7 +58,7 @@
 			}
 			
 		}
-
+		//userdata({"userName": "123", "status": "201", "session": "Xt4nv78kCXcA8eMNFg9ICRahqs9suTJQ"});
 		//新增會員
 		function loginAddNewUser(){
 			var userName = loginForm.username.value;

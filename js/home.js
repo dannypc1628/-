@@ -91,3 +91,23 @@
 			});
 		}
 
+		function goToMap(){
+			$("#view").html("<iframe src=\"testMap.html\"></iframe>");
+					
+		}
+
+		function goToBag(){
+			$("#view").html("<b>背包功能未完成</b>");
+					
+		}
+
+		function goToMonsterList(){
+			$("#view").html("<b>圖鑑功能未完成</b>");
+					
+		}
+
+		function goToFriendList(){
+			$("#view").html("<b>好友功能未完成</b>");
+					
+		}
+

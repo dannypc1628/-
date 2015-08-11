@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<script src="js/jquery.min.js"></script>
 	<style type="text/css">
+	  body{overflow: hidden;}
+	  
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
     <!--Google地圖金鑰-->
@@ -68,7 +70,7 @@ function initialize() {
   // Create a map object, and include the MapTypeId to add
   // to the map type control.
   var mapOptions = {
-    zoom: 18,
+    zoom: 16,
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }

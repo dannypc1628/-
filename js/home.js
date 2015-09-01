@@ -102,27 +102,12 @@
 		}
 
 		function goToMonsterList(){
-			$("#view").html("<b>圖鑑功能未完成</b>");
+			$("#view").html("<div><b>圖鑑功能未完成</b></div>");
 					
 		}
 
 		function goToFriendList(){
-			$("#view").html("
-							<table border="1">
-							<tr>
-							<th>Heading</th>
-							<th>Another Heading</th>
-							</tr>
-							<tr>
-							<td>row 1, cell 1</td>
-							<td>row 1, cell 2</td>
-							</tr>
-							<tr>
-							<td>row 2, cell 1</td>
-							<td>row 2, cell 2</td>
-							</tr>
-							</table>
-				");
+			$("#view").html("<div><table border=\"1\"><tr><th>好友名稱</th><th>可用寵物</th></tr><tr><td>無</td><td>無</td></tr><tr><td>無</td><td>無</td></tr></table></div>");
 					
 		}
 

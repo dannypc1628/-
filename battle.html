@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>戰鬥</title>
+	<meta charset="UTF-8">
+	<!--使用jQuery來與伺服器溝通-->
+	<script src="js/jquery.min.js"></script>
+
+	<!--javaScript 來進行幕後處理-->
+	<!--<script src="js/home.js"></script>-->
+	<link type="text/css" rel="stylesheet" href="css/homeStyle.css"/>
+
+	
+</head>
+
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+	  var canvas = document.getElementById('canvas');
+	  var context = canvas.getContext('2d');
+	  var image = new Image();
+	    
+	  image.onload = function() {
+	    var w = this.width,
+	        h = this.height;
+	      
+	    canvas.width = w;
+	    canvas.height = h;
+	    context.drawImage(this, 0, 0, w/4, h/4);
+	    context.drawImage(this, w/2, 0, w/4, h/4);
+	    context.fillText('Mood', 163, 191); 
+	  }
+
+	  image.src = 'img/monster05.png';
+	</script>
+
+
+</body>
+
+</html>

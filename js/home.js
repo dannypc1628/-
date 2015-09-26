@@ -97,17 +97,18 @@
 		}
 
 		function goToBag(){
-			$("#view").html("<b>背包功能未完成</b>");
+			$("#view").html("<iframe src=\"bag.html\"></iframe>");
 					
 		}
 
 		function goToMonsterList(){
-			$("#view").html("<div><b>圖鑑功能未完成</b></div>");
+			$("#view").html("<iframe src=\"monster.html\"></iframe>");
 					
 		}
 
 		function goToFriendList(){
-			$("#view").html("<div><table border=\"1\"><tr><th>好友名稱</th><th>可用寵物</th></tr><tr><td>無</td><td>無</td></tr><tr><td>無</td><td>無</td></tr></table></div>");
+			$("#view").html("<iframe src=\"friend.html\"></iframe>");
+			//$("#view").html("<div><table border=\"1\"><tr><th>好友名稱</th><th>可用寵物</th></tr><tr><td>無</td><td>無</td></tr><tr><td>無</td><td>無</td></tr></table></div>");
 					
 		}
 

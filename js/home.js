@@ -86,7 +86,7 @@
 					$('#home').fadeIn(); 
 					//$('#view').fadeIn();
 					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");
-					localStorage.userId=returnData.uid; 
+					localStorage.userID=returnData.uid; 
 				},
 			});
 		}

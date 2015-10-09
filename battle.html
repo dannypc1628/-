@@ -31,8 +31,35 @@
 	    context.fillText('Monster Cat', 163, 191); 
 	  }
 
-	  image.src = 'img/monster05.png';
+	  image.src = 'img/monster1.png';
 	</script>
+
+
+	<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+		Your browser does not support the HTML5 canvas tag.
+	</canvas>
+
+	<script>
+
+		var c=document.getElementById("myCanvas");
+		var ctx=c.getContext("2d");
+		ctx.beginPath();
+		var bollRaw = 6;
+		var bollCorrent = 6;
+		var boll[bollRaw][bollCorrent];
+		for(int i =0 ;i<bollRaw;i++){
+			for(int j=0;j<bollCorrent;j++){
+				boll[i][j]= randown(3);
+
+			}
+		}
+		ctx.arc(100,75,50,0,2*Math.PI);
+		ctx.arc(210,75,50,0,2*Math.PI);
+		ctx.stroke();
+
+	</script> 
+
+
 
 
 </body>

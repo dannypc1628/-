@@ -5,62 +5,45 @@
 	<meta charset="UTF-8">
 	<!--使用jQuery來與伺服器溝通-->
 	<script src="js/jquery.min.js"></script>
-
+	<!--JS動畫-->
+	<script type="text/javascript" src="js/jquery.transit.min.js"></script>
+	<script type="text/javascript" src="js/animation.js"></script>
 	<!--javaScript 來進行幕後處理-->
 	<!--<script src="js/home.js"></script>-->
 	<link type="text/css" rel="stylesheet" href="css/homeStyle.css"/>
+	<link type="text/css" rel="stylesheet" href="css/battle.css"/>
 
 	
 </head>
 
-<body>
-	<canvas id="canvas"></canvas>
+<body >
+	
+	
 	<script>
-	  var canvas = document.getElementById('canvas');
-	  var context = canvas.getContext('2d');
-	  var image = new Image();
+	/*  	var canvas = document.getElementById('canvas');
+	  	var context = canvas.getContext('2d');
+	  	var image = new Image();
 	    
-	  image.onload = function() {
-	    var w = this.width,
-	        h = this.height;
+	  	image.onload = function() {
+	    	var w = this.width,
+	        	h = this.height;
 	      
 	    canvas.width = w;
 	    canvas.height = h;
 	    context.drawImage(this, 0, h/3, w/4, h/4);
 	    context.drawImage(this, w/2, 0, w/4, h/4);
-	    context.fillText('Monster Cat', 163, 191); 
-	  }
-
-	  image.src = 'img/monster1.png';
-	</script>
+	    context.fillText('Monster Cat', 163, 191);
 
 
-	<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
-		Your browser does not support the HTML5 canvas tag.
-	</canvas>
+	  	}
 
-	<script>
-
-		var c=document.getElementById("myCanvas");
-		var ctx=c.getContext("2d");
-		ctx.beginPath();
-		var bollRaw = 6;
-		var bollCorrent = 6;
-		var boll[bollRaw][bollCorrent];
-		for(int i =0 ;i<bollRaw;i++){
-			for(int j=0;j<bollCorrent;j++){
-				boll[i][j]= randown(3);
-
-			}
-		}
-		ctx.arc(100,75,50,0,2*Math.PI);
-		ctx.arc(210,75,50,0,2*Math.PI);
-		ctx.stroke();
-
-	</script> 
-
-
-
+	  	image.src = 'img/monster05.png';
+	*/
+	 	</script>
+	<div id='wrapMain'>
+		<img src='img/monster1.png' id="enemy">
+		<img src='img/monster1.png' id="user">
+	</div>
 
 </body>
 

@@ -96,8 +96,8 @@
 					
 		}
 
-		function goToBag(){
-			$("#view").html("<iframe src=\"bag.html\"></iframe>");
+		function goToBox(){
+			$("#view").html("<iframe src=\"box.html\"></iframe>");
 					
 		}
 

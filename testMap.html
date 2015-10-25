@@ -89,7 +89,8 @@ function initialize() {
   	//即時定位navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
     navigator.geolocation.watchPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
+                                       position.coords.longitude,
+                                       gps_options);
       if(gpsRunTime>0)//清除舊的使用者位置
       	userPositionMarker.setMap(null);
 
@@ -100,17 +101,21 @@ function initialize() {
         position: pos,
         title: 'Location found using HTML5.'
       });
-      
+      if(position.coords.latitude!=tempLat && position.coords.longitude!=tempLon){
       //拿怪物資料
-      getMonster(position.coords.latitude,position.coords.longitude);
+       getMonster(position.coords.latitude,position.coords.longitude);
+      }
+      tempLat = position.coords.latitude;
+      tempLon = position.coords.longitude;
+
       map.setCenter(pos);
       setMonsterMarkers(map,beaches);
     }, function() {
       handleNoGeolocation(true);
     }, gps_options = {
-    	//enableHighAccuracy: true, 
-  		maximumAge        : 4000 //間隔時間(毫秒) 
-  		//timeout           : 27000
+    	enableHighAccuracy: false, 
+  		maximumAge        : 9000, //間隔時間(毫秒) 
+  		timeout           : 17000
     }
 
     );
@@ -122,6 +127,8 @@ function initialize() {
 
 
 }
+var tempLat = 0;
+var tempLon =0;
 
 		function getMonster(userlat,userlon){
 			var userID = localStorage.userID;

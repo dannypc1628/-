@@ -22,8 +22,8 @@ function getFriendList(){
 						for(var i = 0 ;i<friendData.length;i++){
 							
 							$("#friendTable").append("	<tr><td>"+friendData[i]["username"]
-								+"</td><td>"+monsterList[i]["uid"]+"</td><td>"
-								+monsterList[i]["capital"]["name"]+"</td></tr>");		
+								+"</td><td>"+friendData[i]["uid"]+"</td><td>"
+								+friendData[i]["capital"]["name"]+"</td></tr>");		
 						}
 						$("#friendTable").append("</tbody>");
 						

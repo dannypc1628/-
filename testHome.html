@@ -23,38 +23,43 @@
 
 <body id="body">
 	<div id="topBar"></div>
-
-	<div id="login">
+	<div id="loginpan">
+		<div id="login">
 		<form name="loginForm">
-			<input name="username"  type="text" value="">
-			<button type="button" onclick="check()">登入</button>
+			<br>
+			<br>
+			<input name="username"  type="text" value="" >
+			<img src='img/login.png' id="loginBtn" onclick="check()">
 		</form>
+		</div>
 	</div>
-	
-	<div> 
-		<button id="clearLocalStorage" onclick="clearLocalStorage()">清除本地資料</button>
+	<br>
+	<div id="cleanbtn"> 
+
+		<a class="myButton" onclick="clearLocalStorage()">刪除帳號</a>
+		
 	</div>
 	
 	<div id="home" >
 		<div id="contralBar">
 			<span>
-				<p>地圖</p>
-				<button onclick="goToMap()">地圖</button>
+				
+				<img src='img/map.png' id="mapBtn" onclick="goToMap()">
 			</span>	
 			
 			<span>
-				<p>背包</p>
-				<button onclick="goToBox()">背包</button>
+				
+				<img src='img/bag.png' id="bagBtn" onclick="goToBox()">
 			</span>
 
 			<span>
-				<p>圖鑑</p>
-				<button onclick="goToMonsterList()">圖鑑</button>
+				
+				<img src='img/lib.png' id="libBtn" onclick="goToMonsterList()">
 			</span>
 
 			<span>
-				<p>好友</p>
-				<button onclick="goToFriendList()">好友</button>
+			
+				<img src='img/friend.png' id="friendBtn" onclick="goToFriendList()">
 			</span>
 
 		</div>

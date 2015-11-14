@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首頁</title>
+	<meta charset="UTF-8">
+	<!--使用jQuery來與伺服器溝通-->
+	<script src="js/jquery.min.js"></script>
+
+	<!--javaScript 來進行幕後處理-->
+	<script src="js/home.js"></script>
+	<!--
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbhEc4uTXbChgqAGn3qMZOFGrmoqVJOrw">
+    </script>
+	-->
+    <!--<script src="js/map.js"></script>-->
+
+	<link type="text/css" rel="stylesheet" href="css/homeStyle.css"/>
+
+
+
+</head>
+
+<body id="body">
+	<div id="topBar"></div>
+	<div id="loginpan">
+		<div id="login">
+		<form name="loginForm">
+			<br>
+			<br>
+			<input name="username"  type="text" value="" >
+			<img src='img/login.png' id="loginBtn" onclick="check()">
+		</form>
+		</div>
+	</div>
+	<br>
+	<div id="cleanbtn"> 
+
+		<a class="myButton" onclick="clearLocalStorage()">刪除帳號</a>
+		
+	</div>
+	
+	<div id="home" >
+		<div id="contralBar">
+			<span>
+				
+				<img src='img/map.png' id="mapBtn" onclick="goToMap()">
+			</span>	
+			
+			<span>
+				
+				<img src='img/bag.png' id="bagBtn" onclick="goToBox()">
+			</span>
+
+			<span>
+				
+				<img src='img/lib.png' id="libBtn" onclick="goToMonsterList()">
+			</span>
+
+			<span>
+			
+				<img src='img/friend.png' id="friendBtn" onclick="goToFriendList()">
+			</span>
+
+		</div>
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<!--<div id="message">message</div>-->
+	
+	<div id="view"></div>
+
+</body>
+
+</html>

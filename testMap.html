@@ -71,6 +71,9 @@ function initialize() {
   // to the map type control.
   var mapOptions = {
     zoom: 16,
+    disableDefaultUI:true,
+    disableDoubleClickZoom: true,
+    scrollwheel: false,
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }

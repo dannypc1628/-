@@ -2,6 +2,7 @@ img {
 	width: 75%;
 	height: auto;
 	position: relative;
+	z-index: 3;
 }
 
 #wrapMain {
@@ -28,16 +29,16 @@ button{
 	position: absolute;
     left: 50%;
     top: 80%;
-	background-color:gray;
+	background: linear-gradient(to right,red,orange,yellow,green);
 }
 #enemyHP{
 	position: absolute;
     left: 10%;
     top: 25%;
-	background-color:gray;
+	background: linear-gradient(to right,red,orange,yellow,green);
 }
 #Projectile{
-	-webkit-transform:rotate(180deg);
+	
 	left: 20%;
     top: 70%;
 	position: absolute;
@@ -46,11 +47,13 @@ button{
 	opacity:0;
 }
 #enemyHPValue{
-
-	width:100%;
-	background-color:green;
+	left: 500px;
+	width:200%;
+	background-color:white;
+	z-index: 0;
 }
 #userHPValue{
-	width:100%;
-	background-color:green;
+	left: 500px;
+	width:200%;
+	background-color:white;
 }

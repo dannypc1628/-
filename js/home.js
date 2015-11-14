@@ -33,7 +33,7 @@
 		function check(){
 
 			if(loginForm.username.value==""){
-				alert("不可以空白");
+				swal("錯誤!","會員名稱不可以為空白","error");
 			}
 			else if (localStorage.loginCount>=1){//登入次數大於一就是老會員
 		  		localStorage.loginCount=Number(localStorage.loginCount) +1;
@@ -58,7 +58,7 @@
 				dataType:"JSONP",
 				jsonpCallback:"userdata",
 				success:function(returnData){
-					alert('新會員 '+returnData.userName+' 您好');
+					swal('歡迎加入!','新會員 '+returnData.userName+' 您好', "success");
 					$('#login').hide();
 					$('#home').fadeIn(); 
 					//$('#view').fadeIn();
@@ -81,7 +81,7 @@
 				dataType:"JSONP",
 				jsonpCallback:"loginstat",
 				success:function(returnData){
-					alert('登入成功\n會員 '+localStorage.userName+' 您好');
+					swal('登入成功!', '會員 '+localStorage.userName+' 您好', "success");
 					$('#login').hide();
 					$('#home').fadeIn(); 
 					//$('#view').fadeIn();

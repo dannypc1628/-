@@ -56,12 +56,12 @@ function addNewFriend(newFriendUserID){
 				jsonpCallback:"addFriend",
 				success:function(returnData){
 					if(returnData.status=="207"){
-						alert('新增 '+newFriendUserID+' 為好友 \n成功');
+						swal("新增成功!",'新增 '+newFriendUserID+' 為好友', "success");
 						
 					}
 					
 					else{
-						alert("失敗。 錯誤代碼 = "+returnData.status+" 錯誤訊息="+returnData.msg);
+						swal("失敗。 錯誤代碼 = "+returnData.status+" 錯誤訊息="+returnData.msg,"error");
 					}
 
 				}

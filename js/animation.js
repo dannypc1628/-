@@ -3,7 +3,7 @@ var enemyHP=20;
 var userHPMax=100.00;
 var enemyHPMax=20.00;
 var userAttack=5;
-var enemyAttack=5;
+var enemyAttack=10;
 var skillAttack=10;
 $(document).ready(function(){
 	/*opening*/
@@ -22,16 +22,18 @@ $(document).ready(function(){
 			$('#user').transition({x:600,y:-1200},100,'ease').transition({x:-250,y:-300},500,'ease',function(){
 				enemyHP=enemyHP-userAttack;
 				$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+				$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+			
 				if(enemyHP<=0){
-					
+					win();
 				}else{
 					userHP=userHP-enemyAttack;
+				
+					$('#enemy').transition({x:-300,y:1000, delay: 600},100,'ease').transition({x:900,y:-70},500,'ease',function(){
+						$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
+						$('#listBtn').show(1);
+					});
 				}
-				$('#enemy').transition({x:-300,y:1000},100,'ease').transition({x:900,y:-70},500,'ease',function(){
-					$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
-					$('#listBtn').show(1);
-				});
-
 			});
 		});
 	});
@@ -40,16 +42,31 @@ $(document).ready(function(){
 			$('#Projectile').transition({opacity:1},100).transition({x:-450,y:600,rotate: '-180deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100,'ease',function(){
 				enemyHP=enemyHP-skillAttack;
 				$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+				$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
 				if(enemyHP<=0){
-					
+					win();
 				}else{
 					userHP=userHP-enemyAttack;
+				
+					$('#enemy').transition({x:-300,y:1000, delay: 600},100,'ease').transition({x:900,y:-70},500,'ease',function(){								
+						$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
+						$('#listBtn').show(1);
+					});
 				}
-				$('#enemy').transition({x:-300,y:1000},100,'ease').transition({x:900,y:-70},500,'ease',function(){								
-					$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
-					$('#listBtn').show(1);
-				});
 			});
 		});
 	});
+
 });
+function win(){
+	$('#enemy').transition({scale:0});
+	swal({
+		title: "Win",  
+
+		closeOnConfirm: false 
+	}, 
+	function(){   
+      	window.open('', '_self', ''); window.close();
+    });
+	
+}

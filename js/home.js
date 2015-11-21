@@ -5,9 +5,11 @@
 			
 			if(localStorage.loginCount>=1){//如果登入次數大於一就顯示使用者名稱
 				loginForm.username.value=localStorage.userName;
+				$("#login").hide();
 			}
 			else{//沒有的話就使用本地儲存，變數名稱loginCount
 				localStorage.loginCount=0;
+				$("#gamestart").hide();
 			}
 
 			if (localStorage.pageCount>=1){//如果登入次數大於等於一就加一
@@ -25,7 +27,7 @@
 		//清除本地儲存的所有資料
 		function clearLocalStorage(){
 			localStorage.clear();
- 
+ 			parent.location.reload();
  			 document.getElementById("topBar").innerHTML="暫存資料已經清除";
 		}
 
@@ -82,7 +84,7 @@
 				jsonpCallback:"loginstat",
 				success:function(returnData){
 					swal('登入成功!', '會員 '+localStorage.userName+' 您好', "success");
-					$('#login').hide();
+					$('#gamestart').hide();
 					$('#home').fadeIn(); 
 					//$('#view').fadeIn();
 					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");

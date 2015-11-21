@@ -1,4 +1,4 @@
-img {
+.pokemon {
 	width: 75%;
 	height: auto;
 	position: relative;
@@ -11,13 +11,13 @@ img {
 	position: absolute;
 	
 }
-button{
-	width: 200px;
-	height: 100px;
-}
+
 #listBtn{
-	position: absolute;
-	float: left;
+	position: fixed;
+	text-align:center ;
+}
+#listBtn span{
+	text-align:center ;
 }
 .HP{
 	width:500px;
@@ -48,12 +48,15 @@ button{
 }
 #enemyHPValue{
 	left: 500px;
-	width:200%;
-	background-color:white;
+	width:0%;
+	height:110%;
+	top: -5%;
+	background-color:gray;
 	z-index: 0;
 }
 #userHPValue{
 	left: 500px;
-	width:200%;
-	background-color:white;
+	width:0%;
+	height:101%;
+	background-color:gray;
 }

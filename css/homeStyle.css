@@ -10,6 +10,9 @@ body{
 #login{
 	text-align:center ;
 }
+#gamestart{
+	text-align:center ;
+}
 #cleanbtn{
 	text-align:center ;	
 }
@@ -21,12 +24,12 @@ input{
 }
 #contralBar{
 
-	position:fixed; top:80%; left:39%;
+	position:fixed; top:87%; left:0%;
 }
 
 #contralBar span{
-
-	float: left;			
+	text-align:center ;
+			
 	
 	
 }

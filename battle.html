@@ -8,35 +8,41 @@
 	<!--JS動畫-->
 	<script type="text/javascript" src="js/jquery.transit.min.js"></script>
 	<script type="text/javascript" src="js/animation.js"></script>
+	<script src="js/home.js"></script>
 	<!--javaScript 來進行幕後處理-->
 	<!--<script src="js/home.js"></script>-->
 	<link type="text/css" rel="stylesheet" href="css/homeStyle.css"/>
 	<link type="text/css" rel="stylesheet" href="css/battle.css"/>
+	<script src="js/sweetalert-master/dist/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="js/sweetalert-master/dist/sweetalert.css">
 
 	
 </head>
 
 <body >
 	<div id='wrapMain'>
-		<img src='img/monster1.png' id="enemy">
+		<img src='img/monster1.png' id="enemy" class="pokemon">
 		<div class='HP' id='enemyHP'>
 			<div class='HP' id='enemyHPValue'>
 
 			</div>
 		</div>
-		<img src='img/monster1.png' id="user">
+		<img src='img/monster2.png' id="user" class="pokemon">
 
 		<div class='HP' id='userHP'>
 			<div class='HP' id='userHPValue'>
 				
 			</div>
 		</div>
-		<div id='listBtn'> 
-			<button id="attack">攻擊</button>
-<!--			<img src='img/map.png' id="attack">   !-->
-			<button id="skill">技能</button>
+		<div id='listBtn'> 	
+			<span>
+			<img src='img/attack.png' id="attack" >
+			</span>
+			<span>
+			<img src='img/skill.png' id="skill" >
+			</span>
 		</div>
-		<img src='img/skill1.png' id="Projectile">
+		<img src='img/skill1.png' id="Projectile" class="pokemon">
 	</div>
 
 </body>

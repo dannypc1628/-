@@ -24,6 +24,14 @@
       //接收其他人座標
       socket.on('location',function(res){
         $("#socketBar").html("<b>成功收到資料 "+res+" </b>");
+
+        if(res.username!=localStorage.userName){
+          var otherUserName = res.username;
+          var otherUserPosition =new google.maps.LatLng(res.latitude, res.longitude);
+        
+          addOtherUser(map,otherUserName,otherUserPosition);
+        }
+        
       });
 
       
@@ -37,7 +45,8 @@ var initialLocation;
 var taipei = new google.maps.LatLng(25.06079047579272, 121.53120506931151);
 
 var browserSupportFlag =  new Boolean();
-var beaches = [];
+var monsterList = [];
+var otherUserList = [];
 var map;
 
 function initialize() {
@@ -117,6 +126,7 @@ function initialize() {
       userPositionMarker = new google.maps.Marker({
         map: map,
         position: pos,
+        label: '我',
         title: 'Location found using HTML5.'
       });
       if(position.coords.latitude!=tempLat && position.coords.longitude!=tempLon){
@@ -129,7 +139,7 @@ function initialize() {
       tempLon = position.coords.longitude;
 
       map.setCenter(pos);
-      setMonsterMarkers(map,beaches);
+      setMonsterMarkers(map,monsterList);
     }, function() {
       handleNoGeolocation(true);
     }, gps_options = {
@@ -164,27 +174,27 @@ var tempLon =0;
 				success:function(returnData){
 					if(returnData.status=="205"){
 						var monsterData = returnData.data;
-						beaches =[];	
-						var beachesTemp=[];
+						monsterList =[];	
+						var monsterListTemp=[];
 						for (var i = 0; i<monsterData.length; i++) {
-							beachesTemp=[];
-							beachesTemp.push(monsterData[i]["name"]);
-							beachesTemp.push(monsterData[i]["lat"]);
-							beachesTemp.push(monsterData[i]["lon"]);
-							beachesTemp.push(i);
-							beaches.push(beachesTemp);
+							monsterListTemp=[];
+							monsterListTemp.push(monsterData[i]["name"]);    //因該是改成怪物id
+							monsterListTemp.push(monsterData[i]["lat"]);
+							monsterListTemp.push(monsterData[i]["lon"]);
+							monsterListTemp.push(i);
+							monsterList.push(monsterListTemp);
 						}
 
 						/* 做成字串處理......，用Array才對
 						for(var i = 0 ; i<monsterDataLength ;i++){
 							if(i>0){
-								beaches = beaches +"," ;
+								monsterList = monsterList +"," ;
 							}
-							beaches = beaches+"['"+monsterData[i]["name"]+"', "+monsterData[i]["lon"]+", "+monsterData[i]["lat"]+", "+i+"]";
+							monsterList = monsterList+"['"+monsterData[i]["name"]+"', "+monsterData[i]["lon"]+", "+monsterData[i]["lat"]+", "+i+"]";
 						}
-						beaches = beaches +" ]";
+						monsterList = monsterList +" ]";
 						*/
-						$("#topBar").html("<b>成功收到資料 "+beaches+" </b>");
+						$("#topBar").html("<b>成功收到資料 "+monsterList+" </b>");
 						
 					}
 					else if(returnData.status=="404"){
@@ -197,7 +207,7 @@ var tempLon =0;
 				}
 			});
 		}
-
+//Locations就是怪物beach
 function setMonsterMarkers(map,locations){
 
     var image = {
@@ -239,7 +249,7 @@ function setMonsterMarkers(map,locations){
 
 }
 /*
-var beachesTest = [
+var monsterListTest = [
   ['Bondi Beach', 25.06079047579, 121.53120506931, 4],
   ['Coogee Beach', 25.6079579272, 121.20506931151, 5],
   ['Cronulla Beach', 25.060799272, 121.120506931151, 3],
@@ -247,6 +257,18 @@ var beachesTest = [
   ['Maroubra Beach',25.0607904757272, 121.312050693151, 1]
 ]; 
 */
+function addOtherUser(map,otherUserName,otherUserPosition){
+  var marker = new google.maps.Marker({
+    position: otherUserPosition,
+    label: otherUserName,
+    map: map
+  });
+}
+
+
+function enterButtonInToBattle(){
+
+}
 
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
@@ -266,21 +288,7 @@ function handleNoGeolocation(errorFlag) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-/*
-    center: new google.maps.LatLng(lat,lon),//經度緯度
-    mapTypeControlOptions: {
-      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-    }
-  };
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-    mapOptions);
 
-  //Associate the styled map with the MapTypeId and set it to display.
-  map.mapTypes.set('map_style', styledMap);
-  map.setMapTypeId('map_style');
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-*/
 </script>
 
 

@@ -21,18 +21,6 @@
       socket.on('connection',function(){
         socket.emit('join',localStorage.session);//送出user資訊
       });
-      //接收其他人座標
-      socket.on('location',function(res){
-        $("#socketBar").html("<b>成功收到資料 "+res+" </b>");
-
-        if(res.username!=localStorage.userName){
-          var otherUserName = res.username;
-          var otherUserPosition =new google.maps.LatLng(res.latitude, res.longitude);
-        
-          addOtherUser(map,otherUserName,otherUserPosition);
-        }
-        
-      });
 
       
       
@@ -46,7 +34,7 @@ var taipei = new google.maps.LatLng(25.06079047579272, 121.53120506931151);
 
 var browserSupportFlag =  new Boolean();
 var monsterList = [];
-var otherUserList = [];
+var otherUserList = new Array()
 var map;
 
 function initialize() {
@@ -102,7 +90,6 @@ function initialize() {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
     }
   };
-
    map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
    map.mapTypes.set('map_style', styledMap);
@@ -135,6 +122,73 @@ function initialize() {
        //送出socket使用者更新後的座標
        socket.emit('location',localStorage.userName,position.coords.latitude,position.coords.longitude);
       }
+
+      //接收其他人座標 
+      var time = 0;
+      socket.on('location',function(returnData){
+        
+        $("#socketBar").html("<b>成功收到資料 "+returnData+" </b>");
+        
+        //如果收到的資料不是自己發出的
+        var data = JSON.parse(returnData);
+        if(data.username==localStorage.userName){
+               console.log("data.username==localStorage.userName  名稱="+data.username);
+               }
+        else{
+          console.log("data.username!=localStorage.userName  名稱="+data.username);
+          
+          //如果其他人資料表是空的
+          if(otherUserList.length == 0){
+            Temp=[];
+            Temp.push(data.username);
+            Temp.push(data.latitude);
+            Temp.push(data.longitude);
+            //push到資料表裡
+            otherUserList.push(Temp);
+            console.log("TempPush進去"+Temp+"length==0 otherUserList="+otherUserList);    
+          }
+
+          //如果不是空的
+          else{
+            //尋找這個人是否在資料表裡
+            var inTheList = 0;
+            console.log("otherUserList的長度="+otherUserList.length);
+            for(var i = 0; i<otherUserList.length ;i++){
+              console.log("迴圈中  otherUserList的長度="+otherUserList.length);
+              //如果在，就更改座標
+              console.log("i = "+i+ "otherUserList[i]="+otherUserList[i]);
+              var otherUserData = otherUserList[i];
+              if(otherUserData[0] == data.username){
+                otherUserData[1] = data.latitude;
+                otherUserData[2] = data.longitude;
+                console.log("原本已經在資料表裡"+otherUserData[0]+ "otherUserList="+otherUserList);  
+                inTheList = 1;
+                break;
+              }
+            }
+            //如果不在裡面
+            if(inTheList == 0){
+              
+              //push到資料表裡
+              Temp=[];
+              Temp.push(data.username);
+              Temp.push(data.latitude);
+              Temp.push(data.longitude);
+              //push到資料表裡
+              otherUserList.push(Temp);
+              console.log("不在資料表裡 已經加入 otherUserList="+otherUserList);
+            }
+          }
+                    
+            setOtherUserMark(map,otherUserList,time);
+            time++;
+
+        }
+        
+      });
+
+
+
       tempLat = position.coords.latitude;
       tempLon = position.coords.longitude;
 
@@ -257,12 +311,23 @@ var monsterListTest = [
   ['Maroubra Beach',25.0607904757272, 121.312050693151, 1]
 ]; 
 */
-function addOtherUser(map,otherUserName,otherUserPosition){
-  var marker = new google.maps.Marker({
-    position: otherUserPosition,
-    label: otherUserName,
+function setOtherUserMark(map,otherUserList,time){
+  if(time>0)
+    otherUserMarker.setMap(null);
+  
+
+  for(var i = 0;i<otherUserList.length;i++){
+
+    var otherUserData = otherUserList[i];
+    var otherLocation = new google.maps.LatLng(otherUserData[1]+0.0001, otherUserData[2]+0.0001);
+    console.log("其他人marker  i="+i+" otherUserData="+otherUserData); 
+    otherUserMarker = new google.maps.Marker({
+    position: otherLocation,
+    label: '其',
     map: map
   });
+  }
+  
 }
 
 

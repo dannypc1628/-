@@ -96,14 +96,12 @@ function win(){
 	
 }
 function setMonster(){
-	alert(monsterList[localStorage.leader].monsterHP);
-	
 	$('#user').attr("src","img/monster"+localStorage.leader+".png");
-	userHP=monsterList[localStorage.leader].monsterHP+localStorage.leader*monsterList[localStorage.leader].HPCoe;
+	userHP=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
 	enemyHP=80;
-	userHPMax=monsterList[localStorage.leader].monsterHP+localStorage.leader*monsterList[localStorage.leader].HPCoe;
+	userHPMax=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
 	enemyHPMax=enemyHP;
-	userAttack=monsterList[localStorage.leader].monsterAttack+localStorage.leader*monsterList[localStorage.leader].AttackCoe;
+	userAttack=monsterList[localStorage.leader].monsterAttack+localStorage.leaderLV*monsterList[localStorage.leader].AttackCoe;
 	enemyAttack=10;
 	skillAttack=userAttack*1.5;
 }

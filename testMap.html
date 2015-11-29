@@ -97,6 +97,7 @@ function initialize() {
 
   //計算GPS定位次數
   var gpsRunTime = 0;
+  var time = 0;
   // Try HTML5 geolocation
   var userPositionMarker;
   if(navigator.geolocation) {
@@ -109,7 +110,7 @@ function initialize() {
       	userPositionMarker.setMap(null);
 
       gpsRunTime++;
-
+      console.log("gpsRunTime="+gpsRunTime);
       userPositionMarker = new google.maps.Marker({
         map: map,
         position: pos,
@@ -124,7 +125,7 @@ function initialize() {
       }
 
       //接收其他人座標 
-      var time = 0;
+      
       socket.on('location',function(returnData){
         
         $("#socketBar").html("<b>成功收到資料 "+returnData+" </b>");
@@ -197,6 +198,7 @@ function initialize() {
     }, function() {
       handleNoGeolocation(true);
     }, gps_options = {
+      frequency: 10000,
     	enableHighAccuracy: false, 
   		maximumAge        : 9000, //間隔時間(毫秒) 
   		timeout           : 17000
@@ -311,11 +313,13 @@ var monsterListTest = [
   ['Maroubra Beach',25.0607904757272, 121.312050693151, 1]
 ]; 
 */
+var otherUserMarker;
 function setOtherUserMark(map,otherUserList,time){
+  
   if(time>0)
     otherUserMarker.setMap(null);
   
-
+console.log("time="+time)
   for(var i = 0;i<otherUserList.length;i++){
 
     var otherUserData = otherUserList[i];

@@ -1,6 +1,7 @@
 		//userdata({"userName": "123", "status": "201", "session": "Xt4nv78kCXcA8eMNFg9ICRahqs9suTJQ"});
 		//在還沒有完全載入這個網頁時，先執行這段程式碼
 		$(document).ready(function() {
+		
 			$("#home").hide(); //隱藏首頁
 			
 			if(localStorage.loginCount>=1){//如果登入次數大於一就顯示使用者名稱
@@ -67,6 +68,8 @@
 					$("#topBar").html("<b>Hello "+returnData.userName+"</b>"); 
 					localStorage.session=returnData.session;
 					localStorage.userName=returnData.userName; 
+					localStorage.leader=1;
+					localStorage.leaderLV=1;
 				},
 			});
 		}

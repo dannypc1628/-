@@ -29,55 +29,50 @@ $(document).ready(function(){
 	});
 	/*己方攻擊*/
 	$('#attack').click(function(){
-		$('#listBtn').hide(1,function(){
-			$('#user').transition({x:600,y:-1200},100,'ease').transition({x:-250,y:-300},500,'ease',function(){
-				enemyHP=enemyHP-userAttack;
-				$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
-				$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		
+		userAtk();
+		enemyHP=enemyHP-userAttack;
+		$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+		$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
 			
-				if(enemyHP<=0){
-					win();
-				}else{
-					userHP=userHP-enemyAttack;
-				
-					$('#enemy').transition({x:-300,y:1000, delay: 600},100,'ease').transition({x:900,y:-70},500,'ease',function(){
-						$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
-						$('#listBtn').show(1);
-					});
-				}
-			});
-		});
+		if(enemyHP<=0){
+			win();
+		}else{
+			userHP=userHP-enemyAttack;
+			enemyAtk();
+			$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
+			$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
+		}
 	});
-	$('#skill').click(function(){
-		$('#listBtn').hide(1,function(){
-			$('#Projectile').transition({opacity:1},100).transition({x:-450,y:600,rotate: '-180deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100,'ease',function(){
-				enemyHP=enemyHP-skillAttack;
-				$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
-				$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
-				if(enemyHP<=0){
-					win();
-				}else{
-					userHP=userHP-enemyAttack;
-				
-					$('#enemy').transition({x:-300,y:1000, delay: 600},100,'ease').transition({x:900,y:-70},500,'ease',function(){								
-						$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
-						$('#listBtn').show(1);
-					});
-				}
-			});
-		});
+
+
+
+	$('#skill').click(function(){	
+		userskl();
+		enemyHP=enemyHP-skillAttack;
+		$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+		$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		if(enemyHP<=0){
+			win();
+		}else{
+			userHP=userHP-enemyAttack;
+			enemyAtk();
+			$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
+			$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
+		}
+			
+	
 	});
 
 });
 
 function win(){
-	var serverUrl = "http://140.136.150.71:20003/user/newMonster"; 
+	var serverUrl = "http://140.136.150.71:20003/api/addMonsterInBox"; 
 	$.ajax({
 		
 		type:"GET",
 		url:serverUrl,
 		data:"session="+localStorage.session+"&monsterID=1",
-
 		dataType:"JSONP",
 		jsonpCallback:"userdata",
 		success:function(returnData){
@@ -104,4 +99,22 @@ function setMonster(){
 	userAttack=monsterList[localStorage.leader].monsterAttack+localStorage.leaderLV*monsterList[localStorage.leader].AttackCoe;
 	enemyAttack=10;
 	skillAttack=userAttack*1.5;
+}
+function userAtk(){
+	$('#listBtn').hide(1,function(){
+		$('#user').transition({x:600,y:-1200},100,'ease').transition({x:-250,y:-300},500,'ease');
+	});
+}
+function userskl(){
+	$('#listBtn').hide(1,function(){
+		$('#Projectile').transition({opacity:1},100).transition({x:-450,y:600,rotate: '-180deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100,'ease');
+	});
+}
+function enemyAtk(){
+	$('#enemy').transition({x:-300,y:1000, delay: 600},100,'ease').transition({x:900,y:-70},500,'ease',function(){
+		$('#listBtn').show(1);
+	});
+}
+function enemyskl(){
+	
 }

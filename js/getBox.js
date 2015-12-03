@@ -13,9 +13,26 @@ $(document).ready(function() {
 
 	
 });
-function setLeader(monsterID,monsterLevel){
+function setList(monsterID,monsterLevel,bid){
 	
-	swal({   
+	swal({
+		title:"",
+		imageUrl: "img/monster"+monsterID+".png", 
+		showCancelButton: true,  
+		showConfirmButton:false,
+		closeOnConfirm:false,
+		text:"<button>合成</button>"+
+		"<button>放生</button>"+
+		"<button onclick='setLeader("+monsterID+","+monsterLevel+","+bid+")'>設為隊長</button>",
+		html:true, 
+		cancelButtonText: "取消",
+	},function(){
+		alert('fuck');
+	});
+}//setLeader("+monsterID+","+monsterLevel+","+bid+")
+function setLeader(monsterID,monsterLevel,bid){
+		alert('finally');
+		swal({   
 		title: "設成隊長?",   
 		showCancelButton: true,   
 		imageUrl: "img/monster"+monsterID+".png", 
@@ -23,9 +40,22 @@ function setLeader(monsterID,monsterLevel){
 		cancelButtonText: "取消",
 	},
 	function(isconfirm){
+		//andy-lin.info:20003/api/api/setCapital?session=使用者id&bid=BJ4
+
 		if (isconfirm) {
 			localStorage.leader=monsterID;
 			localStorage.leaderLV=monsterLevel;
+			$.ajax({
+				type:"GET",
+				url:"andy-lin.info:20003/api/setCapital",
+				data:"session="+localStorage.session+"&bid="+bid,
+				dataType:"JSONP",
+				jsonpCallback:"setCapital",
+				success:function(returnData){
+					
+					
+				},
+			});
 		}
 	});
 }
@@ -48,7 +78,7 @@ function getMyBox(){
 				for(var i = 0 ;i<bagList.length;i++){
 					var monsHp=monsterList[bagList[i].mid].monsterHP+bagList[i].level*monsterList[bagList[i].mid].HPCoe;	
 					var monsAttack=monsterList[bagList[i].mid].monsterAttack+bagList[i].level*monsterList[bagList[i].mid].AttackCoe;	
-					$("#boxTable").append("	<tr class=\"pet\" onclick=\"setLeader("+bagList[i]["mid"]+","+bagList[i]["level"]+")\" ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
+					$("#boxTable").append("	<tr class='pet' onclick='setList("+bagList[i]["mid"]+","+bagList[i]["level"]+","+bagList[i]["bid"]+")' ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
 						+"</td><td>"+bagList[i]["name"]+"</td><td>"
 						+bagList[i]["level"]+"</td><td>"
 						+monsHp+"</td><td>"+monsAttack+"</td></tr>");		

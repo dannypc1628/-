@@ -78,6 +78,7 @@ $(document).ready(function(){
 			
 	
 	});
+	//$('#test').click(enemyskl());
 
 });
 
@@ -143,5 +144,7 @@ function enemyAtk(){
 	}).delay(600);
 }
 function enemyskl(){
-	
+	$('#Projectile').transition({x:450,y:-600},10,'ease').transition({opacity:1,rotate:0},100).transition({x:0,y:0,},1000,'easeInBack').transition({opacity:0,rotate:'-180deg'},10,function(){
+		$('#listBtn').show(1);
+	});
 }

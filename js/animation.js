@@ -67,7 +67,7 @@ $(document).ready(function(){
 });
 
 function win(){
-	var serverUrl = "http://140.136.150.71:20003/api/addMonsterInBox"; 
+	var serverUrl = "http://andy-lin.info:20003/api/addMonsterInBox"; 
 	$.ajax({
 		
 		type:"GET",

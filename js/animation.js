@@ -22,7 +22,7 @@ $(document).ready(function(){
 		$('#wrapMain').transition({opacity:1},450,
 		function(){
 			$('#user').transition({scale:0.5,x:-250,y:-300}).transition({ rotateY: '180deg'});
-			$('#enemy').transition({scale:0.5,x:900,y:-70});
+			$('#enemy').transition({scale:0.5,x:800,y:-70});
 			$('.HP').transition({opacity:1},800);
 			$('#Projectile').transition({rotate: '-180deg'},100);
 		});
@@ -32,16 +32,22 @@ $(document).ready(function(){
 		
 		userAtk();
 		enemyHP=enemyHP-userAttack;
-		$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
-		$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
-			
+		setTimeout(function(){
+			$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+			$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		},100);	
 		if(enemyHP<=0){
 			win();
 		}else{
 			userHP=userHP-enemyAttack;
 			enemyAtk();
+			setTimeout(function(){
 			$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
 			$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
+			},700);	
+			if(userHP<=0){
+				lose();
+			}
 		}
 	});
 
@@ -50,15 +56,24 @@ $(document).ready(function(){
 	$('#skill').click(function(){	
 		userskl();
 		enemyHP=enemyHP-skillAttack;
-		$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
-		$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		setTimeout(function(){
+			$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+			$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		},1000);
 		if(enemyHP<=0){
 			win();
 		}else{
 			userHP=userHP-enemyAttack;
-			enemyAtk();
+			setTimeout(function(){
+				enemyAtk();
+			},1000);
+			setTimeout(function(){
 			$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
 			$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
+			},1600);
+			if(userHP<=0){
+				lose();
+			}
 		}
 			
 	
@@ -74,7 +89,7 @@ function win(){
 		url:serverUrl,
 		data:"session="+localStorage.session+"&monsterID=1",
 		dataType:"JSONP",
-		jsonpCallback:"userdata",
+		jsonpCallback:"newMonster",
 		success:function(returnData){
 					
 		},
@@ -89,6 +104,18 @@ function win(){
       	window.open('', '_self', ''); window.close();
     });
 	
+}
+function lose(){
+	$('#user').transition({scale:0});
+	swal({
+		title: "LOSE",  
+
+		closeOnConfirm: false 
+	}, 
+	function(){   
+      	window.open('', '_self', ''); window.close();
+    });
+
 }
 function setMonster(){
 	$('#user').attr("src","img/monster"+localStorage.leader+".png");
@@ -113,7 +140,7 @@ function userskl(){
 function enemyAtk(){
 	$('#enemy').transition({x:-300,y:1000, delay: 600},100,'ease').transition({x:900,y:-70},500,'ease',function(){
 		$('#listBtn').show(1);
-	});
+	}).delay(600);
 }
 function enemyskl(){
 	

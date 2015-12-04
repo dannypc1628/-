@@ -13,8 +13,60 @@ $(document).ready(function() {
 
 	
 });
-function setLeader(monsterID,monsterLevel){
+function setList(monsterID,monsterLevel,bid){
 	
+	swal({
+		title:"",
+		imageUrl: "img/monster"+monsterID+".png", 
+		showCancelButton: true,  
+		showConfirmButton:false,
+		closeOnConfirm:false,
+		text:"<a class='myButton'>合成</a>"+
+		"<a class='myButton' onclick='releaseMonster("+monsterID+","+bid+")'>放生</a>"+
+		"<a class='myButton' onclick='setLeader("+monsterID+","+monsterLevel+","+bid+")'>設為隊長</a>",
+		html:true, 
+		cancelButtonText: "取消",
+	},function(){
+		alert('fuck');
+	});
+}
+
+//andy-lin.info:20003/api/eatMonster?session=使用者id&eatedMonster=被吃的怪物的BID&eatMonster=吃掉的怪物的bid
+function eatMonster(){
+
+}
+
+
+
+function releaseMonster(monsterID,bid){
+	swal({   
+		title: "確認放生?",   
+		showCancelButton: true,   
+		imageUrl: "img/monster"+monsterID+".png", 
+		confirmButtonText: "確定",
+		cancelButtonText: "取消",
+	},
+	function(isconfirm){
+		//andy-lin.info:20003/api/api/api/releaseMonster?session=使用者id&bid=BJ4
+
+		if (isconfirm) {
+			
+			$.ajax({
+				type:"GET",
+				url:"andy-lin.info:20003/api/releaseMonster",
+				data:"session="+localStorage.session+"&bid="+bid,
+				dataType:"JSONP",
+				jsonpCallback:"releaseMonster",
+				success:function(returnData){
+					
+					
+				},
+			});
+		}
+	});
+}
+function setLeader(monsterID,monsterLevel,bid){
+		
 	swal({   
 		title: "設成隊長?",   
 		showCancelButton: true,   
@@ -23,9 +75,22 @@ function setLeader(monsterID,monsterLevel){
 		cancelButtonText: "取消",
 	},
 	function(isconfirm){
+		//andy-lin.info:20003/api/api/setCapital?session=使用者id&bid=BJ4
+
 		if (isconfirm) {
 			localStorage.leader=monsterID;
 			localStorage.leaderLV=monsterLevel;
+			$.ajax({
+				type:"GET",
+				url:"andy-lin.info:20003/api/setCapital",
+				data:"session="+localStorage.session+"&bid="+bid,
+				dataType:"JSONP",
+				jsonpCallback:"setCapital",
+				success:function(returnData){
+					
+					
+				},
+			});
 		}
 	});
 }
@@ -48,7 +113,7 @@ function getMyBox(){
 				for(var i = 0 ;i<bagList.length;i++){
 					var monsHp=monsterList[bagList[i].mid].monsterHP+bagList[i].level*monsterList[bagList[i].mid].HPCoe;	
 					var monsAttack=monsterList[bagList[i].mid].monsterAttack+bagList[i].level*monsterList[bagList[i].mid].AttackCoe;	
-					$("#boxTable").append("	<tr class=\"pet\" onclick=\"setLeader("+bagList[i]["mid"]+","+bagList[i]["level"]+")\" ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
+					$("#boxTable").append("	<tr class='pet' onclick='setList("+bagList[i]["mid"]+","+bagList[i]["level"]+","+bagList[i]["bid"]+")' ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
 						+"</td><td>"+bagList[i]["name"]+"</td><td>"
 						+bagList[i]["level"]+"</td><td>"
 						+monsHp+"</td><td>"+monsAttack+"</td></tr>");		

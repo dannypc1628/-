@@ -20,14 +20,14 @@
 	text-align:center ;
 }
 .HP{
-	width:50%;
+	width:40%;
 	height: 50px;
 	position: relative;
 	opacity:0;
 }
 #userHP{
 	position: absolute;
-    left: 45%;
+    left: 50%;
     top: 90%;
 	background: linear-gradient(to right,red,orange,yellow,green);
 }
@@ -47,7 +47,7 @@
 	opacity:0;
 }
 #enemyHPValue{
-	left: 500px;
+	left: 100%;
 	width:0%;
 	height:110%;
 	top: -5%;
@@ -55,7 +55,7 @@
 	z-index: 0;
 }
 #userHPValue{
-	left: 500px;
+	left: 100%;
 	top: -5%;
 	width:0%;
 	height:110%;

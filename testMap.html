@@ -352,6 +352,7 @@ function handleNoGeolocation(errorFlag) {
     content: content
   };
   getMonster(25.06079047579272, 121.53120506931151);
+  setMonsterMarkers(map,beaches);
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
 }

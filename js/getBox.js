@@ -21,9 +21,9 @@ function setList(monsterID,monsterLevel,bid){
 		showCancelButton: true,  
 		showConfirmButton:false,
 		closeOnConfirm:false,
-		text:"<a>合成</a>"+
-		"<a onclick='releaseMonster("+monsterID+","+bid+")'>放生</a>"+
-		"<a onclick='setLeader("+monsterID+","+monsterLevel+","+bid+")'>設為隊長</a>",
+		text:"<a class='myButton'>合成</a>"+
+		"<a class='myButton' onclick='releaseMonster("+monsterID+","+bid+")'>放生</a>"+
+		"<a class='myButton' onclick='setLeader("+monsterID+","+monsterLevel+","+bid+")'>設為隊長</a>",
 		html:true, 
 		cancelButtonText: "取消",
 	},function(){

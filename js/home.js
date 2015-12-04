@@ -52,7 +52,7 @@
 		//新增會員
 		function loginAddNewUser(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://140.136.150.71:20003/user/add"; 
+			var serverUrl = "http://andy-lin.info:20003/user/add"; 
 			$("#loading").show();
 			$.ajax({
 				type:"GET",
@@ -79,7 +79,7 @@
 		//登入
 		function login(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://140.136.150.71:20003/user/login"; 
+			var serverUrl = "http://andy-lin.info:20003/user/login"; 
 			$("#loading").show();
 			$.ajax({
 				type:"GET",

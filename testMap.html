@@ -17,7 +17,7 @@
    <!--socket.io-->
     <script type="text/javascript" src="js/socket.io-1.2.0.js"></script>
     <script type="text/javascript">
-      var socket = io.connect('http://140.136.150.71:20004');//連上Socket.io Server
+      var socket = io.connect('http://andy-lin.info:20004');//連上Socket.io Server
       socket.on('connection',function(){
         socket.emit('join',localStorage.session);//送出user資訊
       });
@@ -27,7 +27,7 @@
     </script>
     <!--socket.io to PVP-->
     <script type="text/javascript">
-      var socketPVP = io.connect('http://localhost:20005');//連上Socket.io Server
+      var socketPVP = io.connect('http://140.136.150.71:20005');//連上Socket.io Server
       
         socketPVP.emit("joingame",localStorage.userName,localStorage.userID);
         
@@ -316,14 +316,14 @@ var tempLat = 0;
 var tempLon =0;
 
 		function getMonster(userlat,userlon){
-			var userID = localStorage.userID;
-			var serverUrl = "http://140.136.150.71:20003/api/monster";
+			
+			var serverUrl = "http://andy-lin.info:20003/api/monster";
 			//"http://140.136.150.71:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
 			//position.coords.latitude,position.coords.longitude
 			$.ajax({
 				type:"GET",
 				url:serverUrl,
-				data:"user="+localStorage.userID+"&lat="+userlat+"&lon="+userlon,
+				data:"user="+localStorage.session+"&lat="+userlat+"&lon="+userlon,
 				dataType:"JSONP",
 				jsonpCallback:"mPosition",
 				success:function(returnData){
@@ -333,7 +333,8 @@ var tempLon =0;
 						var monsterListTemp=[];
 						for (var i = 0; i<monsterData.length; i++) {
 							monsterListTemp=[];
-							monsterListTemp.push(monsterData[i]["name"]);    //因該是改成怪物id
+							monsterListTemp.push(monsterData[i]["name"]);
+							monsterListTemp.push(monsterData[i]["mid"]);
 							monsterListTemp.push(monsterData[i]["lat"]);
 							monsterListTemp.push(monsterData[i]["lon"]);
 							monsterListTemp.push(i);
@@ -341,8 +342,11 @@ var tempLon =0;
 						}
 
 						
-						$("#topBar").html("<b>成功收到資料 "+monsterList+" </b>");
-            setMonsterMarkers(map,monsterList);						
+						$("#topBar").html("<b>成功收到資料附近的怪物資訊 </b>");
+						 for (var i = 0; i < monsterList.length; i++) {
+						 	monsterLocationData = monsterList[i];
+            				setMonsterMarkers(map,monsterLocationData);			
+            			}			
 					}
 					else if(returnData.status=="404"){
 						$("#topBar").html("<b>收到的訊息是：這附近沒有怪物</b>");
@@ -355,23 +359,20 @@ var tempLon =0;
 			});
 		}
 //Locations就是怪物beach
-function setMonsterMarkers(map,locations){
-
-    var image = {
-    url: 'img/monster1.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
-    size: new google.maps.Size(589,568),
-    scaledSize: new google.maps.Size(117,113),
-    // The origin for this image is 0,0.
-    origin: new google.maps.Point(0,0),
-    // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(50, 50)
-    };
-
-  for (var i = 0; i < locations.length; i++) {
-    var beach = locations[i];
-    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+function setMonsterMarkers(map,beach){
     
+    var myLatLng = new google.maps.LatLng(beach[2], beach[3]);
+    
+    var image = {
+	    url: 'img/monster'+beach[1]+'.png',
+	    // This marker is 20 pixels wide by 32 pixels tall.
+	    size: new google.maps.Size(589,568),
+	    scaledSize: new google.maps.Size(117,113),
+	    // The origin for this image is 0,0.
+	    origin: new google.maps.Point(0,0),
+	    // The anchor for this image is the base of the flagpole at 0,32.
+	    anchor: new google.maps.Point(50, 50)
+    };
 
     var infowindow =new google.maps.InfoWindow({
     	content:"<p>怪物名稱："+beach[0]+"</p><br><a href=\"battle.html\" target=\"_new\">進入戰鬥</a>",
@@ -383,8 +384,8 @@ function setMonsterMarkers(map,locations){
         map: map,
         icon: image,
         anchorPoint:new google.maps.Point(0,0),
-        title: beach[0],
-        zIndex: beach[3]
+        title: beach[0]
+        
     });
 
     google.maps.event.addListener(marker, 'click' , function(){
@@ -392,7 +393,7 @@ function setMonsterMarkers(map,locations){
     });
 
 
-  }
+  
 
 }
 /*
@@ -482,8 +483,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 </head>
 <body>
-  <div id = "socketBar">socketBar</div>
-	<div id = "topBar">topBar</div>
+  <!--<div id = "socketBar">socketBar</div>-->
+	<div id = "topBar">搜尋怪物中...</div>
 	<div id="map-canvas" ></div>
 </body>
 </html>

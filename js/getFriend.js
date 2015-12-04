@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 function getFriendList(){
 			
-			var serverUrl = "http://140.136.150.71:20003/api/getFriendList";
+			var serverUrl = "http://andy-lin.info:20003/api/getFriendList";
 			//"http://140.136.150.71:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
 			//position.coords.latitude,position.coords.longitude
 			$.ajax({
@@ -45,7 +45,7 @@ function check(){
 
 function addNewFriend(newFriendUserID){
 			
-			var serverUrl = "http://140.136.150.71:20003/api/addFriend";
+			var serverUrl = "http://andy-lin.info:20003/api/addFriend";
 			//"http://140.136.150.71:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
 			//position.coords.latitude,position.coords.longitude
 			$.ajax({

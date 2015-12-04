@@ -52,7 +52,7 @@
 		//新增會員
 		function loginAddNewUser(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://140.136.150.71:20003/user/add"; 
+			var serverUrl = "http://andy-lin.info:20003/user/add"; 
 			$("#loading").show();
 			$.ajax({
 				type:"GET",
@@ -62,14 +62,15 @@
 				jsonpCallback:"userdata",
 				success:function(returnData){
 
-					swal('歡迎加入!','新會員 '+returnData.userName+' 您好', "success");
+					swal('歡迎加入!','新會員 '+returnData.user+' 您好', "success");
 					$('#login').hide();
 					$('#home').fadeIn(); 
 					$("#loading").hide();
 					//$('#view').fadeIn();
-					$("#topBar").html("<b>Hello "+returnData.userName+"</b>"); 
+					$("#topBar").html("<b>Hello "+returnData.user+"</b>"); 
 					localStorage.session=returnData.session;
-					localStorage.userName=returnData.userName; 
+					localStorage.userID=returnData.user_id;
+					localStorage.userName=returnData.user; 
 					localStorage.leader=1;
 					localStorage.leaderLV=1;
 				},
@@ -79,7 +80,7 @@
 		//登入
 		function login(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://140.136.150.71:20003/user/login"; 
+			var serverUrl = "http://andy-lin.info:20003/user/login"; 
 			$("#loading").show();
 			$.ajax({
 				type:"GET",

@@ -21,18 +21,53 @@ function setList(monsterID,monsterLevel,bid){
 		showCancelButton: true,  
 		showConfirmButton:false,
 		closeOnConfirm:false,
-		text:"<button>合成</button>"+
-		"<button>放生</button>"+
-		"<button onclick='setLeader("+monsterID+","+monsterLevel+","+bid+")'>設為隊長</button>",
+		text:"<a>合成</a>"+
+		"<a onclick='releaseMonster("+monsterID+","+bid+")'>放生</a>"+
+		"<a onclick='setLeader("+monsterID+","+monsterLevel+","+bid+")'>設為隊長</a>",
 		html:true, 
 		cancelButtonText: "取消",
 	},function(){
 		alert('fuck');
 	});
-}//setLeader("+monsterID+","+monsterLevel+","+bid+")
+}
+
+//andy-lin.info:20003/api/eatMonster?session=使用者id&eatedMonster=被吃的怪物的BID&eatMonster=吃掉的怪物的bid
+function eatMonster(){
+
+}
+
+
+
+function releaseMonster(monsterID,bid){
+	swal({   
+		title: "確認放生?",   
+		showCancelButton: true,   
+		imageUrl: "img/monster"+monsterID+".png", 
+		confirmButtonText: "確定",
+		cancelButtonText: "取消",
+	},
+	function(isconfirm){
+		//andy-lin.info:20003/api/api/api/releaseMonster?session=使用者id&bid=BJ4
+
+		if (isconfirm) {
+			
+			$.ajax({
+				type:"GET",
+				url:"andy-lin.info:20003/api/releaseMonster",
+				data:"session="+localStorage.session+"&bid="+bid,
+				dataType:"JSONP",
+				jsonpCallback:"releaseMonster",
+				success:function(returnData){
+					
+					
+				},
+			});
+		}
+	});
+}
 function setLeader(monsterID,monsterLevel,bid){
-		alert('finally');
-		swal({   
+		
+	swal({   
 		title: "設成隊長?",   
 		showCancelButton: true,   
 		imageUrl: "img/monster"+monsterID+".png", 

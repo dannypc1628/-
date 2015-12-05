@@ -53,7 +53,7 @@ function releaseMonster(monsterID,bid){
 			
 			$.ajax({
 				type:"GET",
-				url:"andy-lin.info:20003/api/releaseMonster",
+				url:"http://andy-lin.info:20003/api/releaseMonster",
 				data:"session="+localStorage.session+"&bid="+bid,
 				dataType:"JSONP",
 				jsonpCallback:"releaseMonster",
@@ -82,7 +82,7 @@ function setLeader(monsterID,monsterLevel,bid){
 			localStorage.leaderLV=monsterLevel;
 			$.ajax({
 				type:"GET",
-				url:"andy-lin.info:20003/api/setCapital",
+				url:"http://andy-lin.info:20003/api/setCapital",
 				data:"session="+localStorage.session+"&bid="+bid,
 				dataType:"JSONP",
 				jsonpCallback:"setCapital",

@@ -112,7 +112,8 @@ function win(){
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	window.open('', '_self', ''); window.close();
+      	window.open('', '_self', ''); 
+      	window.close();
     });
 	
 }
@@ -130,12 +131,13 @@ function lose(){
 }
 function setMonster(){
 	$('#user').attr("src","img/monster"+localStorage.leader+".png");
+	$('#enemy').attr("src","img/monster"+localStorage.oppositeMonster+".png");
 	userHP=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
-	enemyHP=80;
+	enemyHP=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonster*monsterList[localStorage.oppositeMonster].HPCoe;;
 	userHPMax=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
-	enemyHPMax=enemyHP;
+	enemyHPMax=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].HPCoe;;
 	userAttack=monsterList[localStorage.leader].monsterAttack+localStorage.leaderLV*monsterList[localStorage.leader].AttackCoe;
-	enemyAttack=10;
+	enemyAttack=monsterList[localStorage.oppositeMonster].monsterAttack+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;;
 	skillAttack=userAttack*1.5;
 }
 function userAtk(){

@@ -101,8 +101,8 @@
 		}
 
 		function goToMap(){
-			$("#view").html("<iframe src=\"testMap.html\"></iframe>");
-					
+			//$("#view").html("<iframe src=\"testMap.html\"></iframe>");
+			window.open('testMap.html');		
 		}
 
 		function goToBox(){
@@ -117,7 +117,6 @@
 
 		function goToFriendList(){
 			$("#view").html("<iframe src=\"friend.html\"></iframe>");
-			//$("#view").html("<div><table border=\"1\"><tr><th>好友名稱</th><th>可用寵物</th></tr><tr><td>無</td><td>無</td></tr><tr><td>無</td><td>無</td></tr></table></div>");
 					
 		}
 

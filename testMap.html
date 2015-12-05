@@ -128,7 +128,6 @@
 <script type="text/javascript">
 
 var initialLocation;
-var taipei = new google.maps.LatLng(25.06079047579272, 121.53120506931151);
 
 var browserSupportFlag =  new Boolean();
 var monsterList = [];
@@ -335,8 +334,10 @@ var tempLon =0;
 							monsterListTemp=[];
 							monsterListTemp.push(monsterData[i]["name"]);
 							monsterListTemp.push(monsterData[i]["mid"]);
+							monsterListTemp.push(monsterData[i]["level"]);
 							monsterListTemp.push(monsterData[i]["lat"]);
 							monsterListTemp.push(monsterData[i]["lon"]);
+
 							monsterListTemp.push(i);
 							monsterList.push(monsterListTemp);
 						}
@@ -361,7 +362,7 @@ var tempLon =0;
 //Locations就是怪物beach
 function setMonsterMarkers(map,beach){
     
-    var myLatLng = new google.maps.LatLng(beach[2], beach[3]);
+    var myLatLng = new google.maps.LatLng(beach[3], beach[4]);
     
     var image = {
 	    url: 'img/monster'+beach[1]+'.png',
@@ -375,7 +376,8 @@ function setMonsterMarkers(map,beach){
     };
 
     var infowindow =new google.maps.InfoWindow({
-    	content:"<p>怪物名稱："+beach[0]+"</p><br><a href=\"battle.html\" target=\"_new\">進入戰鬥</a>",
+    	content:"<p>怪物名稱："+beach[0]+"</p><p>怪物等級："+beach[2]+"</p><input type =\"button\" onclick=\"gotoBattle("+beach[1]+","+beach[2]+")\" value=\"進入戰鬥\">",
+    	//content:"<p>怪物名稱："+beach[0]+"</p><br><a href=\"battle.html\" target=\"_new\">進入戰鬥</a>",
     	position:myLatLng
     });
 
@@ -395,6 +397,12 @@ function setMonsterMarkers(map,beach){
 
   
 
+}
+//進入戰鬥畫面
+function gotoBattle(oppositeMonster,oppositeMonsterLV){
+	localStorage.oppositeMonster = oppositeMonster;
+	localStorage.oppositeMonsterLV = oppositeMonsterLV;
+	window.open('battle.html');
 }
 /*
 var monsterListTest = [

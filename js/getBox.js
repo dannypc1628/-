@@ -27,7 +27,7 @@ function setList(monsterID,monsterLevel,bid){
 		html:true, 
 		cancelButtonText: "取消",
 	},function(){
-		alert('fuck');
+		
 	});
 }
 
@@ -39,16 +39,18 @@ function eatMonster(){
 
 
 function releaseMonster(monsterID,bid){
+	
 	swal({   
 		title: "確認放生?",   
 		showCancelButton: true,   
 		imageUrl: "img/monster"+monsterID+".png", 
 		confirmButtonText: "確定",
 		cancelButtonText: "取消",
+		closeOnConfirm:true
 	},
 	function(isconfirm){
 		//andy-lin.info:20003/api/api/api/releaseMonster?session=使用者id&bid=BJ4
-
+		
 		if (isconfirm) {
 			
 			$.ajax({
@@ -58,10 +60,11 @@ function releaseMonster(monsterID,bid){
 				dataType:"JSONP",
 				jsonpCallback:"releaseMonster",
 				success:function(returnData){
-					
+					window.location.reload();
 					
 				},
 			});
+			isconfirm=false;
 		}
 	});
 }
@@ -73,6 +76,7 @@ function setLeader(monsterID,monsterLevel,bid){
 		imageUrl: "img/monster"+monsterID+".png", 
 		confirmButtonText: "更換",
 		cancelButtonText: "取消",
+		closeOnConfirm:true
 	},
 	function(isconfirm){
 		//andy-lin.info:20003/api/api/setCapital?session=使用者id&bid=BJ4

@@ -37,9 +37,10 @@ function eatMonster(){
 }
 
 
-
+var bugRelease=true;
 function releaseMonster(monsterID,bid){
 	
+	if(bugRelease===true){
 	swal({   
 		title: "確認放生?",   
 		showCancelButton: true,   
@@ -60,13 +61,17 @@ function releaseMonster(monsterID,bid){
 				dataType:"JSONP",
 				jsonpCallback:"releaseMonster",
 				success:function(returnData){
-					window.location.reload();
+				//	window.location.reload();
 					
 				},
 			});
-			isconfirm=false;
+			
 		}
 	});
+	bugRelease=false;
+	
+	}
+
 }
 function setLeader(monsterID,monsterLevel,bid){
 		

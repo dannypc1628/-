@@ -73,6 +73,8 @@
 					localStorage.userName=returnData.user; 
 					localStorage.leader=1;
 					localStorage.leaderLV=1;
+					localStorage.oppositeMonster = 1;
+					localStorage.oppositeMonsterLV = 1;
 				},
 			});
 		}
@@ -96,6 +98,8 @@
 					//$('#view').fadeIn();
 					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");
 					localStorage.userID=returnData.uid; 
+					localStorage.oppositeMonster = 1;
+					localStorage.oppositeMonsterLV = 1;
 				},
 			});
 		}

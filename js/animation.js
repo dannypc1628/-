@@ -93,12 +93,12 @@ $(document).ready(function(){
 });
 
 function win(){
-	var serverUrl = "http://andy-lin.info:20003/api/addMonsterInBox"; 
+	 
 	$.ajax({
 		
 		type:"GET",
-		url:serverUrl,
-		data:"session="+localStorage.session+"&monsterID=1",
+		url:serverUrlBattleWinGetNewMonster,
+		data:"session="+localStorage.session+"&monsterID="+localStorage.oppositeMonster,
 		dataType:"JSONP",
 		jsonpCallback:"newMonster",
 		success:function(returnData){

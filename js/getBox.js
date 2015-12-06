@@ -56,7 +56,7 @@ function releaseMonster(monsterID,bid){
 			
 			$.ajax({
 				type:"GET",
-				url:"http://andy-lin.info:20003/api/releaseMonster",
+				url:serverUrlReleaseMonster,
 				data:"session="+localStorage.session+"&bid="+bid,
 				dataType:"JSONP",
 				jsonpCallback:"releaseMonster",
@@ -91,7 +91,7 @@ function setLeader(monsterID,monsterLevel,bid){
 			localStorage.leaderLV=monsterLevel;
 			$.ajax({
 				type:"GET",
-				url:"http://andy-lin.info:20003/api/setCapital",
+				url:serverUrlSetLeader,
 				data:"session="+localStorage.session+"&bid="+bid,
 				dataType:"JSONP",
 				jsonpCallback:"setCapital",
@@ -106,12 +106,11 @@ function setLeader(monsterID,monsterLevel,bid){
 
 function getMyBox(){
 			
-	var serverUrl = "http://andy-lin.info:20003/api/getBox";
-			//"http://140.136.150.71:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
-			//position.coords.latitude,position.coords.longitude
+	//"http://140.136.150.71:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
+	//position.coords.latitude,position.coords.longitude
 	$.ajax({
 		type:"GET",
-		url:serverUrl,
+		url:serverUrlGetMyBox,
 		data:"session="+localStorage.session,
 		dataType:"JSONP",
 		jsonpCallback:"getBox",

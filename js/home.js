@@ -52,11 +52,10 @@
 		//新增會員
 		function loginAddNewUser(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://andy-lin.info:20003/user/add"; 
 			$("#loading").show();
 			$.ajax({
 				type:"GET",
-				url:serverUrl,
+				url:serverUrlFirstLoginAddNewUser,
 				data:"username="+userName,
 				dataType:"JSONP",
 				jsonpCallback:"userdata",
@@ -82,11 +81,10 @@
 		//登入
 		function login(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://andy-lin.info:20003/user/login"; 
 			$("#loading").show();
 			$.ajax({
 				type:"GET",
-				url:serverUrl,
+				url:serverUrlLogin,
 				data:"session="+localStorage.session,
 				dataType:"JSONP",
 				jsonpCallback:"loginstat",

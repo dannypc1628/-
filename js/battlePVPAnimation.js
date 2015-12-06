@@ -93,18 +93,18 @@ function oppositeAtackUsingSkill(){
 		
 
 function win(){
-	var serverUrl = "http://140.136.150.71:20003/api/addMonsterInBox"; 
-	$.ajax({
+	 
+	// $.ajax({
 		
-		type:"GET",
-		url:serverUrl,
-		data:"session="+localStorage.session+"&monsterID=1",
-		dataType:"JSONP",
-		jsonpCallback:"userdata",
-		success:function(returnData){
+	// 	type:"GET",
+	// 	url:serverUrlBattlePVPWin,
+	// 	data:"session="+localStorage.session+"&monsterID=1",
+	// 	dataType:"JSONP",
+	// 	jsonpCallback:"userdata",
+	// 	success:function(returnData){
 					
-		},
-	});
+	// 	},
+	// });
 	$('#enemy').transition({scale:0});
 	swal({
 		title: "Win",  

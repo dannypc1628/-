@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:20005');//連上Socket.io Server
+var socket = io.connect(serverUrlBattlePVPSovcket);//連上Socket.io Server
 socket.emit('joinPVPBattle',localStorage.oldSocketID,localStorage.userName,
         	localStorage.userID,localStorage.whoInvitedYou);
 

@@ -40,6 +40,12 @@ function check(){
 		}
 
 function addNewFriend(newFriendUserID){
+<<<<<<< HEAD
+=======
+			
+			//"http://140.136.150.71:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
+			//position.coords.latitude,position.coords.longitude
+>>>>>>> origin/gh-pages
 			$.ajax({
 				type:"GET",
 				url:serverUrlAddNewFriend,

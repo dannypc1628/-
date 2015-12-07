@@ -119,6 +119,7 @@ function initialize() {
 
 }
 
+
 function getMonster(userlat,userlon){
       
       var serverUrl = "http://andy-lin.info:20003/api/monster";

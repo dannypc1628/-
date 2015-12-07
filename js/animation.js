@@ -93,6 +93,7 @@ $(document).ready(function(){
 });
 
 function win(){
+
 	$.ajax({
 		
 		type:"GET",

@@ -121,4 +121,8 @@
 			$("#view").html("<iframe src=\"friend.html\"></iframe>");
 					
 		}
+		document.addEventListener("deviceready", onDeviceReady, false);    
+			function onDeviceReady() {    
+  				navigator.splashscreen.hide();    
+			}  
 

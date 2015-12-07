@@ -1,10 +1,12 @@
 var userHP=100;
-var enemyHP=20;
+var enemyHP=200;
 var userHPMax=100.00;
 var enemyHPMax=20.00;
 var userAttack=5;
 var enemyAttack=10;
 var skillAttack=10;
+var width=$(window).width();
+var height=$(window).height();
 var monsterList = [
 	{monsterID:0, monsterName:"莫來管" , monsterHP:1,monsterAttack:0,HPCoe:0,AttackCoe:0},
 	{monsterID:1, monsterName:"小白喵" , monsterHP:20,monsterAttack:20,HPCoe:2,AttackCoe:2},
@@ -21,8 +23,8 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$('#wrapMain').transition({opacity:1},450,
 		function(){
-			$('#user').transition({scale:0.5,x:-250,y:-300}).transition({ rotateY: '180deg'});
-			$('#enemy').transition({scale:0.5,x:900,y:-70});
+			$('#user').transition({scale:0.5,x:width*(-25/100),y:height*(-10/100)}).transition({ rotateY: '180deg'});
+			$('#enemy').transition({scale:0.5,x:width*(80/100),y:height*(-5/100)});
 			$('.HP').transition({opacity:1},800);
 			$('#Projectile').transition({rotate: '-180deg'},100);
 		});
@@ -32,16 +34,26 @@ $(document).ready(function(){
 		
 		userAtk();
 		enemyHP=enemyHP-userAttack;
-		$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
-		$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
-			
+		setTimeout(function(){
+			$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+			$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		},100);	
 		if(enemyHP<=0){
-			win();
+			setTimeout(function(){
+				win();
+			},2000);	
 		}else{
 			userHP=userHP-enemyAttack;
 			enemyAtk();
+			setTimeout(function(){
 			$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
 			$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
+			},700);	
+			if(userHP<=0){
+				setTimeout(function(){
+					lose();
+				},2000);
+			}
 		}
 	});
 
@@ -50,31 +62,44 @@ $(document).ready(function(){
 	$('#skill').click(function(){	
 		userskl();
 		enemyHP=enemyHP-skillAttack;
-		$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
-		$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		setTimeout(function(){
+			$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
+			$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
+		},1000);
 		if(enemyHP<=0){
-			win();
+			setTimeout(function(){
+				win();
+			},2000);
 		}else{
 			userHP=userHP-enemyAttack;
-			enemyAtk();
+			setTimeout(function(){
+				enemyAtk();
+			},1000);
+			setTimeout(function(){
 			$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
 			$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
+			},1600);
+			if(userHP<=0){
+				setTimeout(function(){
+					lose();
+				},2000);
+			}
 		}
 			
 	
 	});
+	//$('#test').click(enemyskl());
 
 });
 
 function win(){
-	var serverUrl = "http://andy-lin.info:20003/api/addMonsterInBox"; 
 	$.ajax({
 		
 		type:"GET",
-		url:serverUrl,
-		data:"session="+localStorage.session+"&monsterID=1",
+		url:serverUrlBattleWinGetNewMonster,
+		data:"session="+localStorage.session+"&monsterID="+localStorage.oppositeMonster,
 		dataType:"JSONP",
-		jsonpCallback:"userdata",
+		jsonpCallback:"newMonster",
 		success:function(returnData){
 					
 		},
@@ -86,35 +111,51 @@ function win(){
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	window.open('', '_self', ''); window.close();
+      	window.open('', '_self', ''); 
+      	window.close();
     });
 	
 }
+function lose(){
+	$('#user').transition({scale:0});
+	swal({
+		title: "LOSE",  
+
+		closeOnConfirm: false 
+	}, 
+	function(){   
+      	window.open('', '_self', ''); window.close();
+    });
+
+}
 function setMonster(){
 	$('#user').attr("src","img/monster"+localStorage.leader+".png");
+	$('#enemy').attr("src","img/monster"+localStorage.oppositeMonster+".png");
 	userHP=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
-	enemyHP=80;
+	enemyHP=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonster*monsterList[localStorage.oppositeMonster].HPCoe;;
 	userHPMax=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
-	enemyHPMax=enemyHP;
+	enemyHPMax=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].HPCoe;;
 	userAttack=monsterList[localStorage.leader].monsterAttack+localStorage.leaderLV*monsterList[localStorage.leader].AttackCoe;
-	enemyAttack=10;
+	enemyAttack=monsterList[localStorage.oppositeMonster].monsterAttack+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;;
 	skillAttack=userAttack*1.5;
 }
 function userAtk(){
 	$('#listBtn').hide(1,function(){
-		$('#user').transition({x:600,y:-1200},100,'ease').transition({x:-250,y:-300},500,'ease');
+		$('#user').transition({x:width*(80/100),y:height*(-90/100)},100,'ease').transition({x:width*(-25/100),y:height*(-10/100)},500,'ease');
 	});
 }
 function userskl(){
 	$('#listBtn').hide(1,function(){
-		$('#Projectile').transition({opacity:1},100).transition({x:-450,y:600,rotate: '-180deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100,'ease');
+		$('#Projectile').transition({opacity:1},100).transition({x:width*(-50/100),y:height*(35/100),rotate: '-180deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100,'ease');
 	});
 }
 function enemyAtk(){
-	$('#enemy').transition({x:-300,y:1000, delay: 600},100,'ease').transition({x:900,y:-70},500,'ease',function(){
+	$('#enemy').transition({x:width*(-30/100),y:height*(80/100), delay: 600},100,'ease').transition({x:width*(80/100),y:height*(-5/100)},500,'ease',function(){
 		$('#listBtn').show(1);
-	});
+	}).delay(600);
 }
 function enemyskl(){
-	
+	$('#Projectile').transition({x:width*(50/100),y:height*(-35/100),rotate:0},10,'ease').transition({opacity:1},100).transition({x:0,y:0,},1000,'easeInBack').transition({opacity:0,rotate:'-180deg'},10,function(){
+		$('#listBtn').show(1);
+	});
 }

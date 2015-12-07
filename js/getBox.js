@@ -13,31 +13,101 @@ $(document).ready(function() {
 
 	
 });
-function setLeader(monsterID,monsterLevel){
+function setList(monsterID,monsterLevel,bid){
 	
+	swal({
+		title:"",
+		imageUrl: "img/monster"+monsterID+".png", 
+		showCancelButton: true,  
+		showConfirmButton:false,
+		closeOnConfirm:false,
+		text:"<a class='myButton'>合成</a>"+
+		"<a class='myButton' onclick='releaseMonster("+monsterID+","+bid+")'>放生</a>"+
+		"<a class='myButton' onclick='setLeader("+monsterID+","+monsterLevel+","+bid+")'>設為隊長</a>",
+		html:true, 
+		cancelButtonText: "取消",
+	},function(){
+		
+	});
+}
+
+//andy-lin.info:20003/api/eatMonster?session=使用者id&eatedMonster=被吃的怪物的BID&eatMonster=吃掉的怪物的bid
+function eatMonster(){
+
+}
+
+
+var bugRelease=true;
+function releaseMonster(monsterID,bid){
+	
+	if(bugRelease===true){
+	swal({   
+		title: "確認放生?",   
+		showCancelButton: true,   
+		imageUrl: "img/monster"+monsterID+".png", 
+		confirmButtonText: "確定",
+		cancelButtonText: "取消",
+		closeOnConfirm:true
+	},
+	function(isconfirm){
+		//andy-lin.info:20003/api/api/api/releaseMonster?session=使用者id&bid=BJ4
+		
+		if (isconfirm) {
+			
+			$.ajax({
+				type:"GET",
+				url:serverUrlReleaseMonster,
+				data:"session="+localStorage.session+"&bid="+bid,
+				dataType:"JSONP",
+				jsonpCallback:"releaseMonster",
+				success:function(returnData){
+				//	window.location.reload();
+					
+				},
+			});
+			
+		}
+	});
+	bugRelease=false;
+	
+	}
+
+}
+function setLeader(monsterID,monsterLevel,bid){
+		
 	swal({   
 		title: "設成隊長?",   
 		showCancelButton: true,   
 		imageUrl: "img/monster"+monsterID+".png", 
 		confirmButtonText: "更換",
 		cancelButtonText: "取消",
+		closeOnConfirm:true
 	},
 	function(isconfirm){
+		//andy-lin.info:20003/api/api/setCapital?session=使用者id&bid=BJ4
+
 		if (isconfirm) {
 			localStorage.leader=monsterID;
 			localStorage.leaderLV=monsterLevel;
+			$.ajax({
+				type:"GET",
+				url:serverUrlSetLeader,
+				data:"session="+localStorage.session+"&bid="+bid,
+				dataType:"JSONP",
+				jsonpCallback:"setCapital",
+				success:function(returnData){
+					
+					
+				},
+			});
 		}
 	});
 }
 
 function getMyBox(){
-			
-	var serverUrl = "http://andy-lin.info:20003/api/getBox";
-			//"http://andy-lin.info:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
-			//position.coords.latitude,position.coords.longitude
 	$.ajax({
 		type:"GET",
-		url:serverUrl,
+		url:serverUrlGetMyBox,
 		data:"session="+localStorage.session,
 		dataType:"JSONP",
 		jsonpCallback:"getBox",
@@ -48,7 +118,7 @@ function getMyBox(){
 				for(var i = 0 ;i<bagList.length;i++){
 					var monsHp=monsterList[bagList[i].mid].monsterHP+bagList[i].level*monsterList[bagList[i].mid].HPCoe;	
 					var monsAttack=monsterList[bagList[i].mid].monsterAttack+bagList[i].level*monsterList[bagList[i].mid].AttackCoe;	
-					$("#boxTable").append("	<tr class=\"pet\" onclick=\"setLeader("+bagList[i]["mid"]+","+bagList[i]["level"]+")\" ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
+					$("#boxTable").append("	<tr class='pet' onclick='setList("+bagList[i]["mid"]+","+bagList[i]["level"]+","+bagList[i]["bid"]+")' ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
 						+"</td><td>"+bagList[i]["name"]+"</td><td>"
 						+bagList[i]["level"]+"</td><td>"
 						+monsHp+"</td><td>"+monsAttack+"</td></tr>");		

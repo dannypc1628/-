@@ -1,7 +1,7 @@
 		//userdata({"userName": "123", "status": "201", "session": "Xt4nv78kCXcA8eMNFg9ICRahqs9suTJQ"});
 		//在還沒有完全載入這個網頁時，先執行這段程式碼
 		$(document).ready(function() {
-		
+			$("#loading").hide();
 			$("#home").hide(); //隱藏首頁
 			
 			if(localStorage.loginCount>=1){//如果登入次數大於一就顯示使用者名稱
@@ -52,24 +52,28 @@
 		//新增會員
 		function loginAddNewUser(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://andy-lin.info:20003/user/add"; 
-			
+			$("#loading").show();
 			$.ajax({
 				type:"GET",
-				url:serverUrl,
+				url:serverUrlFirstLoginAddNewUser,
 				data:"username="+userName,
 				dataType:"JSONP",
 				jsonpCallback:"userdata",
 				success:function(returnData){
-					swal('歡迎加入!','新會員 '+returnData.userName+' 您好', "success");
+
+					swal('歡迎加入!','新會員 '+returnData.user+' 您好', "success");
 					$('#login').hide();
 					$('#home').fadeIn(); 
+					$("#loading").hide();
 					//$('#view').fadeIn();
-					$("#topBar").html("<b>Hello "+returnData.userName+"</b>"); 
+					$("#topBar").html("<b>Hello "+returnData.user+"</b>"); 
 					localStorage.session=returnData.session;
-					localStorage.userName=returnData.userName; 
+					localStorage.userID=returnData.user_id;
+					localStorage.userName=returnData.user; 
 					localStorage.leader=1;
 					localStorage.leaderLV=1;
+					localStorage.oppositeMonster = 1;
+					localStorage.oppositeMonsterLV = 1;
 				},
 			});
 		}
@@ -77,28 +81,30 @@
 		//登入
 		function login(){
 			var userName = loginForm.username.value;
-			var serverUrl = "http://andy-lin.info:20003/user/login"; 
-			
+			$("#loading").show();
 			$.ajax({
 				type:"GET",
-				url:serverUrl,
+				url:serverUrlLogin,
 				data:"session="+localStorage.session,
 				dataType:"JSONP",
 				jsonpCallback:"loginstat",
 				success:function(returnData){
 					swal('登入成功!', '會員 '+localStorage.userName+' 您好', "success");
 					$('#gamestart').hide();
+					$("#loading").hide();
 					$('#home').fadeIn(); 
 					//$('#view').fadeIn();
 					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");
 					localStorage.userID=returnData.uid; 
+					localStorage.oppositeMonster = 1;
+					localStorage.oppositeMonsterLV = 1;
 				},
 			});
 		}
 
 		function goToMap(){
-			$("#view").html("<iframe src=\"testMap.html\"></iframe>");
-					
+			//$("#view").html("<iframe src=\"testMap.html\"></iframe>");
+			window.open('testMap.html');		
 		}
 
 		function goToBox(){
@@ -113,7 +119,10 @@
 
 		function goToFriendList(){
 			$("#view").html("<iframe src=\"friend.html\"></iframe>");
-			//$("#view").html("<div><table border=\"1\"><tr><th>好友名稱</th><th>可用寵物</th></tr><tr><td>無</td><td>無</td></tr><tr><td>無</td><td>無</td></tr></table></div>");
 					
 		}
+		document.addEventListener("deviceready", onDeviceReady, false);    
+			function onDeviceReady() {    
+  				navigator.splashscreen.hide();    
+			}  
 

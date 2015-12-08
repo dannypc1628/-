@@ -108,8 +108,10 @@ function win(){
 	$('#enemy').transition({scale:0});
 	swal({
 		title: "Win",  
-
-		closeOnConfirm: false 
+		text:"<a class='myButton' href='testMap.html'>確定</a>",
+		html:true,
+		closeOnConfirm: false,
+		showConfirmButton: false
 	}, 
 	function(){   
       	window.open('', '_self', ''); 
@@ -121,8 +123,10 @@ function lose(){
 	$('#user').transition({scale:0});
 	swal({
 		title: "LOSE",  
-
-		closeOnConfirm: false 
+		text:"<a class='myButton' href='testMap.html'>確定</a>",
+		html:true,
+		closeOnConfirm: false,
+		showConfirmButton: false
 	}, 
 	function(){   
       	window.open('', '_self', ''); window.close();

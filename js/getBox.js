@@ -9,6 +9,7 @@ var monsterList = [
 	{monsterID:7, monsterName:"皮卡喵" , monsterHP:30,monsterAttack:26,HPCoe:4,AttackCoe:4}
 ];
 $(document).ready(function() {
+	$("#loading").show();
 	getMyBox();
 
 	
@@ -53,7 +54,7 @@ function releaseMonster(monsterID,bid){
 		//andy-lin.info:20003/api/api/api/releaseMonster?session=使用者id&bid=BJ4
 		
 		if (isconfirm) {
-			
+			$("#loading").show();
 			$.ajax({
 				type:"GET",
 				url:serverUrlReleaseMonster,
@@ -61,8 +62,8 @@ function releaseMonster(monsterID,bid){
 				dataType:"JSONP",
 				jsonpCallback:"releaseMonster",
 				success:function(returnData){
-				//	window.location.reload();
-					
+					window.location.reload();
+					$("#loading").hide();
 				},
 			});
 			
@@ -87,6 +88,7 @@ function setLeader(monsterID,monsterLevel,bid){
 		//andy-lin.info:20003/api/api/setCapital?session=使用者id&bid=BJ4
 
 		if (isconfirm) {
+			$("#loading").show();
 			localStorage.leader=monsterID;
 			localStorage.leaderLV=monsterLevel;
 			$.ajax({
@@ -96,7 +98,7 @@ function setLeader(monsterID,monsterLevel,bid){
 				dataType:"JSONP",
 				jsonpCallback:"setCapital",
 				success:function(returnData){
-					
+					$("#loading").hide();
 					
 				},
 			});
@@ -108,6 +110,7 @@ function getMyBox(){
 			
 	//"http://140.136.150.71:20003/api/monster?user=1&lat=121.512386&lon=25.051269"; 
 	//position.coords.latitude,position.coords.longitude
+	$("#loading").show();
 	$.ajax({
 		type:"GET",
 		url:serverUrlGetMyBox,
@@ -115,6 +118,7 @@ function getMyBox(){
 		dataType:"JSONP",
 		jsonpCallback:"getBox",
 		success:function(returnData){
+			$("#loading").hide();
 			var bagList=returnData.data;
 			
 			$("#boxTable").append("<tbody>");

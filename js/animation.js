@@ -19,6 +19,7 @@ var monsterList = [
 ];
 $(document).ready(function(){
 	setMonster();
+	
 	/*opening*/
 	setTimeout(function(){
 		$('#wrapMain').transition({opacity:1},450,
@@ -33,8 +34,10 @@ $(document).ready(function(){
 	$('#attack').click(function(){
 		
 		userAtk();
+		
 		enemyHP=enemyHP-userAttack;
 		setTimeout(function(){
+			
 			$('#enemyHPValue').css("left",function(i){return enemyHP*100/enemyHPMax+"%";});
 			$('#enemyHPValue').css("width",function(i){return 100-(enemyHP*100/enemyHPMax)+"%";});
 		},100);	
@@ -46,6 +49,7 @@ $(document).ready(function(){
 			userHP=userHP-enemyAttack;
 			enemyAtk();
 			setTimeout(function(){
+				
 			$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
 			$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
 			},700);	
@@ -133,9 +137,11 @@ function setMonster(){
 	$('#user').attr("src","img/monster"+localStorage.leader+".png");
 	$('#enemy').attr("src","img/monster"+localStorage.oppositeMonster+".png");
 	userHP=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
-	enemyHP=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonster*monsterList[localStorage.oppositeMonster].HPCoe;;
-	userHPMax=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
-	enemyHPMax=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].HPCoe;;
+	enemyHP=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].HPCoe;;
+	
+	userHPMax=userHP;
+	enemyHPMax=enemyHP;
+	
 	userAttack=monsterList[localStorage.leader].monsterAttack+localStorage.leaderLV*monsterList[localStorage.leader].AttackCoe;
 	enemyAttack=monsterList[localStorage.oppositeMonster].monsterAttack+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;;
 	skillAttack=userAttack*1.5;

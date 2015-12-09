@@ -62,7 +62,9 @@
 				success:function(returnData){
 
 					swal('歡迎加入!','新會員 '+returnData.user+' 您好', "success");
-					$('#login').hide();
+					$('#cleanbtn').hide();
+					$('#topBar').hide();
+					$('#loginpan').hide();
 					$('#home').fadeIn(); 
 					$("#loading").hide();
 					//$('#view').fadeIn();
@@ -90,7 +92,9 @@
 				jsonpCallback:"loginstat",
 				success:function(returnData){
 					swal('登入成功!', '會員 '+localStorage.userName+' 您好', "success");
-					$('#gamestart').hide();
+					$('#cleanbtn').hide();
+					$('#topBar').hide();
+					$('#loginpan').hide();
 					$("#loading").hide();
 					$('#home').fadeIn(); 
 					//$('#view').fadeIn();

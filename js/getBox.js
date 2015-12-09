@@ -163,10 +163,18 @@ function getMyBox(){
 				for(var i = 0 ;i<bagList.length;i++){
 					var monsHp=monsterList[bagList[i].mid].monsterHP+bagList[i].level*monsterList[bagList[i].mid].HPCoe;	
 					var monsAttack=monsterList[bagList[i].mid].monsterAttack+bagList[i].level*monsterList[bagList[i].mid].AttackCoe;	
-					$("#boxTable").append("	<tr class='pet' onclick='setList("+bagList[i]["mid"]+","+bagList[i]["level"]+","+bagList[i]["bid"]+")' ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
+					if(bagList[i].capital==true){
+						$("#boxTable").append("	<tr class='pet' onclick='setList("+bagList[i]["mid"]+","+bagList[i]["level"]+","+bagList[i]["bid"]+")' ><td style='background:red;'>"+
+							"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
 						+"</td><td>"+bagList[i]["name"]+"</td><td>"
 						+bagList[i]["level"]+"</td><td>"
-						+monsHp+"</td><td>"+monsAttack+"</td></tr>");		
+						+monsHp+"</td><td>"+monsAttack+"</td></tr>");
+					}else{
+						$("#boxTable").append("	<tr class='pet' onclick='setList("+bagList[i]["mid"]+","+bagList[i]["level"]+","+bagList[i]["bid"]+")' ><td>"+"<img src='img/monster"+bagList[i].mid+".png'  style='height: 100px; width: auto;'>"
+							+"</td><td>"+bagList[i]["name"]+"</td><td>"
+							+bagList[i]["level"]+"</td><td>"
+							+monsHp+"</td><td>"+monsAttack+"</td></tr>");	
+					}	
 				}
 				$("#boxTable").append("</tbody>");
 						

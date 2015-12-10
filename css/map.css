@@ -8,3 +8,12 @@ html, body, #map-canvas
 	margin: 0; 
 	padding: 0;
 }
+#backbtn{
+	position: absolute;
+	left:95%;
+	top:0%;
+	
+}
+img{
+	height: 50px;
+}

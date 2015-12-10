@@ -129,7 +129,7 @@ function lose(){
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	window.open('', '_self', ''); window.close();
+      	window.open('', '_self', ''); 
     });
 
 }

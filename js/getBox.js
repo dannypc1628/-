@@ -42,7 +42,7 @@ function eatMonster(monsterID,eatBid){
 		var monsHp=monsterList[bagList[i].mid].monsterHP+bagList[i].level*monsterList[bagList[i].mid].HPCoe;	
 		var monsAttack=monsterList[bagList[i].mid].monsterAttack+bagList[i].level*monsterList[bagList[i].mid].AttackCoe;	
 		if(bagList[i].bid==eatBid||bagList[i].capital==true){
-			i++;
+			continue;
 		}
 
 		$("#boxTable").append(

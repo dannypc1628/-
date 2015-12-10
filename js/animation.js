@@ -116,8 +116,8 @@ function win(){
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	window.open('', '_self', ''); 
-      	window.close();
+      	goToHome();
+      	
     });
 	
 }
@@ -129,7 +129,7 @@ function lose(){
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	window.open('', '_self', ''); 
+      	goToHome();
     });
 
 }

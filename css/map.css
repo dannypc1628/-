@@ -16,4 +16,5 @@ html, body, #map-canvas
 }
 img{
 	height: 50px;
+	z-index: 9;
 }

@@ -19,7 +19,7 @@ function getFriendList(){
 					
 					$("#friendTable").append("	<tr><td>"+friendData[i]["username"]
 						+"</td><td>"+friendData[i]["uid"]+"</td><td>"
-						+friendData[i]["capital"]["name"]+"</td></tr>");		
+						+"<img src='img/monster"+friendData[i]["capital"]["mid"]+".png'  style='height: 100px; width: auto;'>"+"</td></tr>");		
 				}
 				$("#friendTable").append("</tbody>");
 				

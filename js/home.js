@@ -69,13 +69,7 @@
 					function(){
 						goToHome();
 					});
-					$('#cleanbtn').hide();
-					$('#topBar').hide();
-					$('#loginpan').hide();
-					$('#home').fadeIn(); 
-					$("#loading").hide();
-					//$('#view').fadeIn();
-					$("#topBar").html("<b>Hello "+returnData.user+"</b>"); 
+					 
 					localStorage.session=returnData.session;
 					localStorage.userID=returnData.user_id;
 					localStorage.userName=returnData.user; 
@@ -106,13 +100,7 @@
 					function(){
 						goToHome();
 					});
-					$('#cleanbtn').hide();
-					$('#topBar').hide();
-					$('#loginpan').hide();
-					$("#loading").hide();
-					$('#home').fadeIn(); 
-					//$('#view').fadeIn();
-					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");
+					
 					localStorage.userID=returnData.uid; 
 					localStorage.oppositeMonster = 1;
 					localStorage.oppositeMonsterLV = 1;

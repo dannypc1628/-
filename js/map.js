@@ -207,7 +207,7 @@ function setMonsterMarkers(map,monsterLocationData){
 function gotoBattle(oppositeMonster,oppositeMonsterLV){
   localStorage.oppositeMonster = oppositeMonster;
   localStorage.oppositeMonsterLV = oppositeMonsterLV;
-  window.open('battle.html');
+  window.open('battle.html','_self');
 }
 /*多個標記的範例資料
 var monsterListTest = [

@@ -2,7 +2,7 @@
 		//在還沒有完全載入這個網頁時，先執行這段程式碼
 		$(document).ready(function() {
 			$("#loading").hide();
-			$("#home").hide(); //隱藏首頁
+			//$("#home").hide(); //隱藏首頁
 			
 			if(localStorage.loginCount>=1){//如果登入次數大於一就顯示使用者名稱
 				loginForm.username.value=localStorage.userName;
@@ -61,12 +61,15 @@
 				jsonpCallback:"userdata",
 				success:function(returnData){
 
-					swal('歡迎加入!','新會員 '+returnData.user+' 您好', "success");
-					$('#login').hide();
-					$('#home').fadeIn(); 
-					$("#loading").hide();
-					//$('#view').fadeIn();
-					$("#topBar").html("<b>Hello "+returnData.user+"</b>"); 
+					swal({
+						title:'歡迎加入!',
+						text:'新會員 '+returnData.user+' 您好', 
+						type:"success",
+					},
+					function(){
+						goToHome();
+					});
+					 
 					localStorage.session=returnData.session;
 					localStorage.userID=returnData.user_id;
 					localStorage.userName=returnData.user; 
@@ -74,6 +77,7 @@
 					localStorage.leaderLV=1;
 					localStorage.oppositeMonster = 1;
 					localStorage.oppositeMonsterLV = 1;
+					
 				},
 			});
 		}
@@ -89,22 +93,28 @@
 				dataType:"JSONP",
 				jsonpCallback:"loginstat",
 				success:function(returnData){
-					swal('登入成功!', '會員 '+localStorage.userName+' 您好', "success");
-					$('#gamestart').hide();
-					$("#loading").hide();
-					$('#home').fadeIn(); 
-					//$('#view').fadeIn();
-					$("#topBar").html("<b>Hello "+localStorage.userName+" !</b>");
+					swal({
+						title:'登入成功!', 
+						text:'會員 '+localStorage.userName+' 您好',
+						type: "success"},
+					function(){
+						goToHome();
+					});
+					
 					localStorage.userID=returnData.uid; 
 					localStorage.oppositeMonster = 1;
 					localStorage.oppositeMonsterLV = 1;
+					
 				},
 			});
 		}
-
+		function goToHome(){
+			window.open("testHome.html","_self");
+			
+		}
 		function goToMap(){
 			//$("#view").html("<iframe src=\"testMap.html\"></iframe>");
-			window.open('testMap.html');		
+			window.open('testMap.html','_self');
 		}
 
 		function goToBox(){

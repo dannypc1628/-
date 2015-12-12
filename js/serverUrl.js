@@ -2,6 +2,7 @@ var serverUrlGetMyBox = "http://andy-lin.info:20003/api/getBox" ;
 var serverUrlSetLeader = "http://andy-lin.info:20003/api/setCapital" ;
 
 var serverUrlReleaseMonster = "http://andy-lin.info:20003/api/releaseMonster";
+var serverUrlEatMonster="http://andy-lin.info:20003/api/eatMonster";
 var serverUrlBattleWinGetNewMonster = "http://andy-lin.info:20003/api/addMonsterInBox";
 var serverUrlBattlePVPWin ;
 

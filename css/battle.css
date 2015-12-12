@@ -13,12 +13,10 @@
 }
 
 #listBtn{
-	position: fixed;
-	text-align:center ;
+	position: relative;
+	
 }
-#listBtn span{
-	text-align:center ;
-}
+
 .HP{
 	width:40%;
 	height: 50px;

@@ -55,7 +55,7 @@ function initialize() {
   // Create a map object, and include the MapTypeId to add
   // to the map type control.
   var mapOptions = {
-    zoom: 16,
+    zoom: 18,
     disableDefaultUI:true,
     disableDoubleClickZoom: true,
     scrollwheel: false,

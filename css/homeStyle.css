@@ -39,7 +39,7 @@ iframe{
 	/*min-height: 500px;*/
 	border-style: none;
 	position: absolute;
-	overflow: visible;
+	overflow: hidden;
 }
 
 /*

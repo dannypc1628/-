@@ -53,9 +53,15 @@ function addNewFriend(newFriendUserID){
 				dataType:"JSONP",
 				jsonpCallback:"addFriend",
 				success:function(returnData){
+
 					if(returnData.status=="207"){
-						swal("新增成功!",'新增 '+newFriendUserID+' 為好友', "success");
-						
+						swal({
+						title:'新增成功!', 
+						text:'新增 '+newFriendUserID+' 為好友',
+						type: "success"},
+						function(){
+						window.location.reload();
+					});
 					}
 					
 					else{

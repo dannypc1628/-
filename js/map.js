@@ -262,8 +262,8 @@ function inviteBattle(otherUserName){
     var thisUserName = onlineUser[i]["username"];
     if(thisUserName == otherUserName){
       console.log("otherUserName == thisUserName");
-      socketPVP.emit('invited',onlineUser[i]["socketID"],localStorage.leader,localStorage.leaderLV);
-      console.log("socketPVP.emit(invited)"+onlineUser[i]["socketID"]);
+      socket.emit('invited',onlineUser[i]["socketID"],localStorage.leader,localStorage.leaderLV);
+      console.log("socket  PVP  emit(invited)"+onlineUser[i]["socketID"]);
       //自己是被自己邀請
       localStorage.whoInvitedYou = localStorage.oldSocketID; 
     }

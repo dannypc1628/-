@@ -14,31 +14,32 @@
 
 #listBtn{
 	position: relative;
+	top:-50px;
 	
 }
 
 .HP{
 	width:40%;
-	height: 50px;
+	height: 30px;
 	position: relative;
 	opacity:0;
 }
 #userHP{
 	position: absolute;
     left: 50%;
-    top: 90%;
+    top: 105%;
 	background: linear-gradient(to right,red,orange,yellow,green);
 }
 #enemyHP{
 	position: absolute;
     left: 10%;
-    top: 25%;
+    top: 30%;
 	background: linear-gradient(to right,red,orange,yellow,green);
 }
 #Projectile{
 	
-	left: 20%;
-    top: 70%;
+	left: 15%;
+    top: 80%;
 	position: absolute;
 	max-width: 30%;
 	height: auto;

@@ -10,11 +10,11 @@ html, body, #map-canvas
 }
 #backbtn{
 	position: absolute;
-	left:95%;
+	left:90%;
 	top:0%;
 	
 }
 img{
 	height: 50px;
-	z-index: 9;
+	z-index: 99;
 }

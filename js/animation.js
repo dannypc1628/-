@@ -19,7 +19,7 @@ var monsterList = [
 ];
 $(document).ready(function(){
 	setMonster();
-	
+	$('#listBtn').hide();
 	/*opening*/
 	setTimeout(function(){
 		$('#wrapMain').transition({opacity:1},450,
@@ -27,9 +27,9 @@ $(document).ready(function(){
 			$('#user').transition({scale:0.5,x:width*(-25/100),y:height*(-10/100)}).transition({ rotateY: '180deg'});
 			$('#enemy').transition({scale:0.5,x:width*(80/100),y:height*(-5/100)});
 			$('.HP').transition({opacity:1},800);
-			$('#Projectile').transition({rotate: '-180deg'},100);
+			$('#listBtn').show();
 		});
-	});
+	},300);
 	/*己方攻擊*/
 	$('#attack').click(function(){
 		
@@ -116,7 +116,7 @@ function win(){
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	goToHome();
+      	goToMap();
       	
     });
 	
@@ -129,7 +129,7 @@ function lose(){
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	goToHome();
+      	goToMap();
     });
 
 }
@@ -152,9 +152,33 @@ function userAtk(){
 	});
 }
 function userskl(){
-	$('#listBtn').hide(1,function(){
-		$('#Projectile').transition({opacity:1},100).transition({x:width*(-50/100),y:height*(35/100),rotate: '-180deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100,'ease');
-	});
+	
+	switch(localStorage.leader){
+		case '1':
+			skill1(0);
+			break;
+		case '2':
+			skill2(0);
+			break;
+		case '3':
+			skill3(0);
+			break;
+		case '4':
+			skill4(0);
+			break;
+		case '5':
+			skill5(0);
+			break;
+		case '6':
+			skill6(0);		
+			break;
+		case '7':
+			skill7(0);
+			break;
+		default:
+			skill6(0);
+			break;
+	}
 }
 function enemyAtk(){
 	$('#enemy').transition({x:width*(-30/100),y:height*(80/100), delay: 600},100,'ease').transition({x:width*(80/100),y:height*(-5/100)},500,'ease',function(){
@@ -165,4 +189,82 @@ function enemyskl(){
 	$('#Projectile').transition({x:width*(50/100),y:height*(-35/100),rotate:0},10,'ease').transition({opacity:1},100).transition({x:0,y:0,},1000,'easeInBack').transition({opacity:0,rotate:'-180deg'},10,function(){
 		$('#listBtn').show(1);
 	});
+}
+
+
+
+function skill1(site){
+	$('#Projectile').attr('src','img/skill1.png');
+	if(site==0){
+		$('#listBtn').hide(1,function(){
+			$('#Projectile').transition({x:width*(45/100),y:height*(-40/100)},100).transition({opacity:1},100).transition({opacity:0},1000).transition({x:0,y:0},100);
+		});
+	}else{
+
+	}
+}
+function skill2(site){
+	$('#Projectile').attr('src','img/skill2.png');
+	if(site==0){
+		$('#Projectile').transition({rotate: '-90deg'},100);
+		$('#listBtn').hide(1,function(){
+			$('#Projectile').transition({opacity:1},100).transition({x:width*(50/100),y:height*(30/100)},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0},100);
+		});
+	}else{
+
+	}
+}
+function skill3(site){
+	$('#Projectile').attr('src','img/skill3.png');
+	if(site==0){
+
+	}else{
+
+	}
+}
+function skill4(site){
+	$('#Projectile').attr('src','img/skill4.png');
+	if(site==0){
+		$('#Projectile').transition({rotate: '-135deg'},100);
+		$('#listBtn').hide(1,function(){
+			$('#Projectile').transition({opacity:1},100).transition({x:width*(15/100),y:height*(40/100)},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0},100);
+
+		});
+	}else{
+
+	}
+}
+function skill5(site){
+	$('#Projectile').attr('src','img/skill5.png');
+	if(site==0){
+
+		$('#listBtn').hide(1,function(){
+			$('#Projectile').transition({opacity:1},100).transition({x:width*(50/100),y:height*(-35/100),rotate:'720deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate:0},100);
+		});
+	}else{
+
+	}	
+}
+function skill6(site){
+	$('#Projectile').attr('src','img/skill6.png');
+	if(site==0){
+		$('#Projectile').transition({rotate: '-180deg'},100);
+		$('#listBtn').hide(1,function(){
+			$('#Projectile').transition({opacity:1},100).transition({x:width*(-50/100),y:height*(35/100),rotate: '-180deg'},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100);
+		});
+	}else{
+		$('#Projectile').transition({x:width*(50/100),y:height*(-35/100),rotate:0},10,'ease').transition({opacity:1},100).transition({x:0,y:0,},1000,'easeInBack').transition({opacity:0,rotate:'-180deg'},10,function(){
+			$('#listBtn').show(1);
+		});
+	}
+}
+function skill7(site){
+	$('#Projectile').attr('src','img/skill7.png');
+	if (site==0) {
+		$('#listBtn').hide(1,function(){
+			$('#Projectile').transition({opacity:1},100).transition({x:width*(50/100),y:height*(-35/100)},1000,'easeInBack').transition({opacity:0},100).transition({x:0,y:0},100);
+		});
+	}else{
+
+	}
 }

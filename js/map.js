@@ -95,6 +95,7 @@ function initialize() {
        getMonster(position.coords.latitude,position.coords.longitude);
        //送出socket使用者更新後的座標
        socket.emit('location',localStorage.userName,position.coords.latitude,position.coords.longitude);
+       console.log(localStorage.userName+"  "+position.coords.latitude+"  "+position.coords.longitude);
       tempLat = position.coords.latitude;
       tempLon = position.coords.longitude;
       }

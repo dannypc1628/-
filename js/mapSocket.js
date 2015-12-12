@@ -1,9 +1,19 @@
 var time = 0;
 
-var socket = io.connect(serverUrlMapSocket);//連上Socket.io Server
-      socket.on('connection',function(){
-        socket.emit('join',localStorage.session);//送出user資訊
-      });
+var onlineUser = [];
+var oppositeID = "";
+var roomInform = {};
+var roomID = "";
+
+
+
+var socket = io(serverUrlMapSocket);//連上Socket.io Server
+     
+    socket.emit("joingame",localStorage.userName,localStorage.userID);
+    console.log("送出joingame");
+    localStorage.oldSocketID = socket.id;
+    console.log("我的socket id = "+localStorage.oldSocketID);
+  
 
 
       //接收其他人座標 
@@ -93,15 +103,6 @@ var socket = io.connect(serverUrlMapSocket);//連上Socket.io Server
 
 
 
-var socketPVP = io.connect(serverUrlBattlePVPSovcket);
-		socketPVP.emit("joingame",localStorage.userName,localStorage.userID);
-
-var onlineUser = [];
-var oppositeID = "";
-var roomInform = {};
-var roomID = "";
-
-
 
 function findUserUsingSocket(condition,method){
 method = method || "uid"
@@ -117,14 +118,14 @@ return resultIndex
 /*
       收到活著的訊息,單純收下來
       */
-      socketPVP.on('alive',function(uid,userName,socketID){
+      socket.on('alive',function(uid,userName,socketID){
         onlineUser.push({"uid":uid,"username":userName,"socketID":socketID})
         console.log("收到在線上的使用者：" + userName);
       });
       /*
       新使用者,接受新使用者的SocketID,並且跟他說我活著
       */
-      socketPVP.on('newUser',function(uid,userName,socketID){
+      socket.on('newUser',function(uid,userName,socketID){
         console.log("上線");
         if(uid==localStorage.userID){
           localStorage.oldSocketID = socketID;
@@ -133,12 +134,12 @@ return resultIndex
         else{
           onlineUser.push({"uid":uid,"username":userName,"socketID":socketID})
           //向新使用者發送在線廣播
-          socketPVP.emit('alive',socketID,localStorage.userID,localStorage.userName)
+          socket.emit('alive',socketID,localStorage.userID,localStorage.userName)
           console.log("剛上線的使用者：" + userName +" 已經送出我還在線上");
         }
       });
       //收到邀請戰鬥
-      socketPVP.on('invited',function(host,oppositeMonster,oppositeMonsterLV){
+      socket.on('invited',function(host,oppositeMonster,oppositeMonsterLV){
         //辨識是誰邀請的戰鬥
         console.log("收到邀請");
         hostData = findUserUsingSocket(host,"socketID")
@@ -150,7 +151,7 @@ return resultIndex
           accept = confirm("玩家名稱："+hostData["username"]+" 請求跟您決鬥")
           if (accept){
             //傳送接受戰鬥給Server
-            socketPVP.emit('accept',host,localStorage.leader,localStorage.leaderLV);
+            socket.emit('accept',host,localStorage.leader,localStorage.leaderLV);
             localStorage.oppositeMonster = oppositeMonster;
             localStorage.oppositeMonsterLV = oppositeMonsterLV;
             localStorage.whoInvitedYou = host;
@@ -158,13 +159,13 @@ return resultIndex
           }
           else{
             //傳送不接受戰鬥給Server
-            socketPVP.emit('unaccept',host)
+            socket.emit('unaccept',host)
             console.log("我不接受戰鬥");
           }
         }
       });
       //雙方接受戰鬥，準備進入battlePVP.html
-      socketPVP.on('goToBattleRoom',function(msg1,msg2,msg3){
+      socket.on('goToBattleRoom',function(msg1,msg2,msg3){
         if(msg1){
           localStorage.oppositeMonster = msg2;
           localStorage.oppositeMonsterLV = msg3;

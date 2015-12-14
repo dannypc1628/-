@@ -49,7 +49,7 @@ $(document).ready(function(){
 			}else{
 				userHP=userHP-enemyAttack;
 				setTimeout(function(){
-					enemyskl();
+					enemyAtk();
 					setTimeout(function(){
 					
 						$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});

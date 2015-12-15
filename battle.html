@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="js/jquery.transit.min.js"></script>
 	<script type="text/javascript" src="js/animation.js"></script>
 	<script type="text/javascript" src="js/serverUrl.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
 	<!--javaScript 來進行幕後處理-->
 	<!--<script src="js/home.js"></script>-->
 	<link type="text/css" rel="stylesheet" href="css/homeStyle.css"/>
@@ -20,6 +21,7 @@
 </head>
 
 <body >
+	<audio id="battleSound" src="audio/battle.mp3"      type="audio/mpeg" ></audio>
 	<div id='wrapMain'>
 		<img src='img/monster1.png' id="enemy" class="pokemon">
 		<div class='HP' id='enemyHP'>
@@ -34,7 +36,7 @@
 				
 			</div>
 		</div>
-		<div id='listBtn'> 	
+		<div id='listBtn' align="center"> 	
 			<span>
 			<img src='img/attack.png' id="attack" >
 			</span>

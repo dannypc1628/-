@@ -5,18 +5,14 @@
 	<meta charset="UTF-8">
 	<script src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/serverUrl.js"></script>
-	<style type="text/css">
-	  body{overflow: hidden;}
-	  
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/map.css">
   
   <!--Google地圖金鑰-->
   <script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbhEc4uTXbChgqAGn3qMZOFGrmoqVJOrw">
   </script>
   <script type="text/javascript" src="js/map.js"></script>
- 
+  <script type="text/javascript" src="js/home.js"></script>
   <!--socket.io-->
   <script type="text/javascript" src="js/socket.io-1.2.0.js"></script>
   <script type="text/javascript" src="js/mapSocket.js"></script>
@@ -27,8 +23,15 @@
 
 </head>
 <body>
+  <audio id="townSound" src="audio/town.mp3"      type="audio/mpeg" ></audio>
+  
   <!--<div id = "socketBar">socketBar</div>-->
 	<div id = "topBar">搜尋怪物中...</div>
+  <br>
+  <br>
+  <span id="backbtn">
+    <img src='img/backbtn.png'  onclick="goToHome()">
+  </span> 
 	<div id="map-canvas" ></div>
 </body>
 </html>

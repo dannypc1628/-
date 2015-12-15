@@ -21,12 +21,13 @@
 	<div id="center">
 		<form name="addFriendForm">
 			<input name="username"  type="text" value="">
-			<button type="button" onclick="check()">新增好友</button>
+			<button type="button" onclick="checkFriend()">新增好友</button>
 		</form>
+		<p>我的id=</p>
 		<h1>我的好友列表</h1>
 		<table id="friendTable" class="cssTab">
 			<thead>
-				<tr>
+				<tr id="title">
 					<td>好友名稱</td>
 					<td>好友id</td>
 					<td>擁有的寵物</td>

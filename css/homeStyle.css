@@ -22,24 +22,20 @@ input{
 #loginBtn{
 	position:fixed; top:5%; 
 }
-#contralBar{
 
-	position:fixed; top:87%; left:0%;
+#home{
+	position: absolute;
+	top:90%;
+	width: 100%;
 }
 
-#contralBar span{
-	text-align:center ;
-			
-	
-	
-}
 
 #view{
 	height: 200%;
 }
 iframe{
 	width:95%;
-	height:65%;
+	height:85%;
 	/*min-height: 500px;*/
 	border-style: none;
 	position: absolute;

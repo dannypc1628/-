@@ -1,0 +1,20 @@
+body
+{
+	overflow: hidden;
+}
+html, body, #map-canvas 
+{ 
+	height: 95%; 
+	margin: 0; 
+	padding: 0;
+}
+#backbtn{
+	position: absolute;
+	left:85%;
+	top:0%;
+	
+}
+img{
+	height: 50px;
+	z-index: 99;
+}

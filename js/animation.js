@@ -75,10 +75,10 @@ $(document).ready(function(){
 				setTimeout(function(){
 					enemyAtk();
 				
-				setTimeout(function(){
-					$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
-					$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
-					},600);
+					setTimeout(function(){
+						$('#userHPValue').css("left",function(i){return userHP*100/userHPMax+"%";});
+						$('#userHPValue').css("width",function(i){return 100-(userHP*100/userHPMax)+"%";});
+					},1300);
 				
 					if(userHP<=0){
 						setTimeout(function(){
@@ -150,7 +150,7 @@ function setMonster(){
 	userAttack=monsterList[localStorage.leader].monsterAttack
 		+localStorage.leaderLV*monsterList[localStorage.leader].AttackCoe;
 	enemyAttack=monsterList[localStorage.oppositeMonster].monsterAttack
-		+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;;
+		+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;
 	skillAttack=userAttack*1.5;
 }
 function userAtk(){
@@ -189,10 +189,17 @@ function userskl(){
 	}
 }
 function enemyAtk(){
-	$('#enemy').transition({x:width*(-30/100),y:height*(80/100), delay: 600},100,'ease')
-	.transition({x:width*(80/100),y:height*(-5/100)},500,'ease',function(){
-		$('#listBtn').show(1);
-	}).delay(600);
+	enemyAttack=monsterList[localStorage.oppositeMonster].monsterAttack
+		+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;
+	if(Math.floor((Math.random() * 100) + 1)>30){
+		$('#enemy').transition({x:width*(-30/100),y:height*(80/100), delay: 600},100,'ease')
+		.transition({x:width*(80/100),y:height*(-5/100)},500,'ease',function(){
+			$('#listBtn').show(1);
+		}).delay(600);
+	}else{
+		enemyAttack*=1.5;
+		enemyskl();
+	}
 }
 function enemyskl(){
 	switch(localStorage.oppositeMonster){
@@ -259,16 +266,17 @@ function skill2(site){
 }
 function skill3(site){
 	$('#Projectile').attr('src','img/skill3.png');
+	$('#Projectile').transition({scale:0.5},10)
 	if(site==0){
 		$('#listBtn').hide(1,function(){
-			$('#Projectile').transition({scale:0.5},10)
-			.transition({opacity:1},100)
+			
+			$('#Projectile').transition({opacity:1},100)
 			.transition({x:width*(25/100),y:height*(-25/100),scale:1.5},1000)
-			.transition({opacity:0},100).transition({x:0,y:0},100);
+			.transition({opacity:0},10).transition({x:0,y:0,scale:1},10);
 		});
 	}else{
-		$('#Projectile').transition({x:width*(30/100),y:height*(-30/100),scale:0.5},10)
-		.transition({opacity:1},100).transition({x:0,y:0,scale:1.5},1000)
+		$('#Projectile').transition({x:width*(60/100),y:height*(-60/100)},10)
+		.transition({opacity:1},100).transition({x:0,y:0,scale:1.5},1000,'snap')
 		.transition({opacity:0},100,function(){
 			$('#listBtn').show();
 		});
@@ -288,7 +296,7 @@ function skill4(site){
 		$('#Projectile').transition({rotate: '45deg'},10);
 		$('#Projectile').transition({x:width*(-15/100),y:height*(-40/100)},10)
 		.transition({opacity:1},10)
-		.transition({x:0,y:0},700,'easeInBack')
+		.transition({x:0,y:0},1000,'easeInBack')
 		.transition({opacity:0},10,function(){
 			$('#listBtn').show();
 		});
@@ -300,13 +308,13 @@ function skill5(site){
 
 		$('#listBtn').hide(1,function(){
 			$('#Projectile').transition({opacity:1},100)
-			.transition({x:width*(50/100),y:height*(-35/100),rotate:'720deg'},1000,'easeInBack')
+			.transition({x:width*(50/100),y:height*(-35/100),rotate:'540deg'},1000,'easeInBack')
 			.transition({opacity:0},100).transition({x:0,y:0,rotate:0},100);
 		});
 	}else{
 		$('#Projectile').transition({x:width*(50/100),y:height*(-35/100),rotate:0},10)
 		.transition({opacity:1},10)
-		.transition({x:0,y:0,rotate:'-720deg'},700,'easeInBack')
+		.transition({x:0,y:0,rotate:'-540deg'},1000,'easeInBack')
 		.transition({opacity:0},10,function(){
 			$('#listBtn').show();
 		});
@@ -315,16 +323,16 @@ function skill5(site){
 function skill6(site){
 	$('#Projectile').attr('src','img/skill6.png');
 	if(site==0){
-		$('#Projectile').transition({rotate: '-180deg'},100);
+		$('#Projectile').transition({rotate: '-180deg'},10);
 		$('#listBtn').hide(1,function(){
-			$('#Projectile').transition({opacity:1},100)
+			$('#Projectile').transition({opacity:1},10)
 			.transition({x:width*(-50/100),y:height*(35/100),rotate: '-180deg'},1000,'easeInBack')
-			.transition({opacity:0},100).transition({x:0,y:0,rotate: '-180deg'},100);
+			.transition({opacity:0},100).transition({x:0,y:0,rotate: '0deg'},10);
 		});
 	}else{
-		$('#Projectile').transition({x:width*(50/100),y:height*(-35/100)})
-		.transition({opacity:1},100).transition({x:0,y:0})
-		.transition({opacity:0},100,function(){
+		$('#Projectile').transition({x:width*(50/100),y:height*(-35/100)},10)
+		.transition({opacity:1},10).transition({x:0,y:0},1000,'easeInBack')
+		.transition({opacity:0},10,function(){
 			$('#listBtn').show();
 		});
 	}
@@ -333,14 +341,14 @@ function skill7(site){
 	$('#Projectile').attr('src','img/skill7.png');
 	if (site==0) {
 		$('#listBtn').hide(1,function(){
-			$('#Projectile').transition({opacity:1},100)
+			$('#Projectile').transition({opacity:1},10)
 			.transition({x:width*(50/100),y:height*(-35/100)},1000,'easeInBack')
-			.transition({opacity:0},100).transition({x:0,y:0},100);
+			.transition({opacity:0},10).transition({x:0,y:0},10);
 		});
 	}else{
-		$('#Projectile').transition({x:width*(50/100),y:height*(-35/100)})
-		.transition({opacity:1},100).transition({x:0,y:0})
-		.transition({opacity:0},100,function(){
+		$('#Projectile').transition({x:width*(50/100),y:height*(-35/100)},10)
+		.transition({opacity:1},10).transition({x:0,y:0},1000,'easeInBack')
+		.transition({opacity:0},10,function(){
 			$('#listBtn').show();
 		});
 	}

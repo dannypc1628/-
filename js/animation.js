@@ -7,17 +7,8 @@ var enemyAttack=10;
 var skillAttack=10;
 var width=$(window).width();
 var height=$(window).height();
-var monsterList = [
-	{monsterID:0, monsterName:"莫來管" , monsterHP:1,monsterAttack:0,HPCoe:0,AttackCoe:0},
-	{monsterID:1, monsterName:"小白喵" , monsterHP:20,monsterAttack:20,HPCoe:2,AttackCoe:2},
-	{monsterID:2, monsterName:"小狐狸" , monsterHP:30,monsterAttack:20,HPCoe:6,AttackCoe:1},
-	{monsterID:3, monsterName:"狗"     , monsterHP:20,monsterAttack:30,HPCoe:1,AttackCoe:5},
-	{monsterID:4, monsterName:"小水喵" , monsterHP:28,monsterAttack:24,HPCoe:3,AttackCoe:2},
-	{monsterID:5, monsterName:"木手喵" , monsterHP:27,monsterAttack:27,HPCoe:1,AttackCoe:4},
-	{monsterID:6, monsterName:"火苗喵" , monsterHP:24,monsterAttack:28,HPCoe:2,AttackCoe:3},
-	{monsterID:7, monsterName:"皮卡喵" , monsterHP:30,monsterAttack:26,HPCoe:4,AttackCoe:4}
-];
 $(document).ready(function(){
+	document.getElementById('battleSound').play()
 	setMonster();
 	$('#listBtn').hide();
 	/*opening*/
@@ -265,9 +256,18 @@ function skill2(site){
 function skill3(site){
 	$('#Projectile').attr('src','img/skill3.png');
 	if(site==0){
-
+		$('#listBtn').hide(1,function(){
+			$('#Projectile').transition({scale:0.5},10)
+			.transition({opacity:1},100)
+			.transition({x:width*(25/100),y:height*(-25/100),scale:1.5},1000)
+			.transition({opacity:0},100).transition({x:0,y:0},100);
+		});
 	}else{
-
+		$('#Projectile').transition({x:width*(30/100),y:height*(-30/100),scale:0.5},10)
+		.transition({opacity:1},100).transition({x:0,y:0,scale:1.5},1000)
+		.transition({opacity:0},100,function(){
+			$('#listBtn').show();
+		});
 	}
 }
 function skill4(site){

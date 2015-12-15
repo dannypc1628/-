@@ -1,6 +1,7 @@
 		//userdata({"userName": "123", "status": "201", "session": "Xt4nv78kCXcA8eMNFg9ICRahqs9suTJQ"});
 		//在還沒有完全載入這個網頁時，先執行這段程式碼
 		$(document).ready(function() {
+			document.getElementById('muraSound').play();
 			$("#loading").hide();
 			//$("#home").hide(); //隱藏首頁
 			

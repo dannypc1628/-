@@ -11,7 +11,7 @@ var tempLat = 0;
 var tempLon =0;
 
 function initialize() {
-
+  document.getElementById('townSound').play()
   // Create an array of styles.
   var styles = [
     {

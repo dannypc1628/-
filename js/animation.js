@@ -18,6 +18,7 @@ var monsterList = [
 	{monsterID:7, monsterName:"皮卡喵" , monsterHP:30,monsterAttack:26,HPCoe:4,AttackCoe:4}
 ];
 $(document).ready(function(){
+	document.getElementById('battleSound').play()
 	setMonster();
 	$('#listBtn').hide();
 	/*opening*/

@@ -7,7 +7,7 @@ var roomID = "";
 
 
 
-var socket = io(serverUrlMapSocket);//連上Socket.io Server
+var socket = io.connect(serverUrlMapSocket);//連上Socket.io Server
      
     socket.emit("joingame",localStorage.userName,localStorage.userID);
     console.log("送出joingame");
@@ -82,27 +82,6 @@ var socket = io(serverUrlMapSocket);//連上Socket.io Server
         }
         
       });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function findUserUsingSocket(condition,method){
 method = method || "uid"

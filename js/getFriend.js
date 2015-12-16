@@ -19,7 +19,7 @@ function getFriendList(){
 					
 					$("#friendTable").append("	<tr><td>"+friendData[i]["username"]
 						+"</td><td>"+friendData[i]["uid"]+"</td><td>"
-						+friendData[i]["capital"]["name"]+"</td></tr>");		
+						+"<img src='img/monster"+friendData[i]["capital"]["mid"]+".png'  style='height: 100px; width: auto;'>"+"</td></tr>");		
 				}
 				$("#friendTable").append("</tbody>");
 				
@@ -53,9 +53,15 @@ function addNewFriend(newFriendUserID){
 				dataType:"JSONP",
 				jsonpCallback:"addFriend",
 				success:function(returnData){
+
 					if(returnData.status=="207"){
-						swal("新增成功!",'新增 '+newFriendUserID+' 為好友', "success");
-						
+						swal({
+						title:'新增成功!', 
+						text:'新增 '+newFriendUserID+' 為好友',
+						type: "success"},
+						function(){
+						window.location.reload();
+					});
 					}
 					
 					else{

@@ -96,7 +96,7 @@ $(document).ready(function(){
 });
 
 function win(){
-
+	$('#listBtn').hide(1);
 	$.ajax({
 		
 		type:"GET",
@@ -110,11 +110,9 @@ function win(){
 	});
 	$('#enemy').transition({scale:0});
 	swal({
-		title: "Win",  
-		text:"<a class='myButton' href='testMap.html'>確定</a>",
-		html:true,
-		closeOnConfirm: false,
-		showConfirmButton: false
+		title: "YOU WIN",  
+
+		closeOnConfirm: false 
 	}, 
 	function(){   
       	goToMap();
@@ -123,13 +121,12 @@ function win(){
 	
 }
 function lose(){
+	$('#listBtn').hide(1);
 	$('#user').transition({scale:0});
 	swal({
-		title: "LOSE",  
-		text:"<a class='myButton' href='testMap.html'>確定</a>",
-		html:true,
-		closeOnConfirm: false,
-		showConfirmButton: false
+		title: "YOU LOSE",  
+
+		closeOnConfirm: false 
 	}, 
 	function(){   
       	goToMap();
@@ -160,7 +157,7 @@ function userAtk(){
 	});
 }
 function userskl(){
-	
+	$('#Projectile').transition({x:0,y:0,rotate:'0deg',scale:1},10)
 	switch(localStorage.leader){
 		case '1':
 			skill1(0);
@@ -191,7 +188,7 @@ function userskl(){
 function enemyAtk(){
 	enemyAttack=monsterList[localStorage.oppositeMonster].monsterAttack
 		+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;
-	if(Math.floor((Math.random() * 100) + 1)>30){
+	if(Math.floor((Math.random() * 100) + 1)>40){
 		$('#enemy').transition({x:width*(-30/100),y:height*(80/100), delay: 600},100,'ease')
 		.transition({x:width*(80/100),y:height*(-5/100)},500,'ease',function(){
 			$('#listBtn').show(1);
@@ -202,6 +199,7 @@ function enemyAtk(){
 	}
 }
 function enemyskl(){
+	$('#Projectile').transition({x:0,y:0,rotate:'0deg',scale:1},10)
 	switch(localStorage.oppositeMonster){
 		case '1':
 			skill1(1);
@@ -249,15 +247,15 @@ function skill1(site){
 function skill2(site){
 	$('#Projectile').attr('src','img/skill2.png');
 	if(site==0){
-		$('#Projectile').transition({rotate: '-90deg'},100);
+		$('#Projectile').transition({rotate: '-90deg'},10);
 		$('#listBtn').hide(1,function(){
 			$('#Projectile').transition({opacity:1},100)
-			.transition({x:width*(50/100),y:height*(30/100)},1000)
+			.transition({x:width*(50/100),y:height*(-35/100)},1000)
 			.transition({opacity:0},100).transition({x:0,y:0},100);
 		});
 	}else{
-		$('#Projectile').transition({rotate: '90deg'},100);
-		$('#Projectile').transition({x:width*(-50/100),y:height*(-30/100)},100)
+		$('#Projectile').transition({rotate: '90deg'},10);
+		$('#Projectile').transition({x:width*(50/100),y:height*(-30/100)},100)
 		.transition({opacity:1},100).transition({x:0,y:0},1000)
 		.transition({opacity:0},100,function(){
 			$('#listBtn').show();
@@ -271,11 +269,11 @@ function skill3(site){
 		$('#listBtn').hide(1,function(){
 			
 			$('#Projectile').transition({opacity:1},100)
-			.transition({x:width*(25/100),y:height*(-25/100),scale:1.5},1000)
+			.transition({x:width*(35/100),y:height*(-35/100),scale:1.5},1000,'snap')
 			.transition({opacity:0},10).transition({x:0,y:0,scale:1},10);
 		});
 	}else{
-		$('#Projectile').transition({x:width*(60/100),y:height*(-60/100)},10)
+		$('#Projectile').transition({x:width*(35/100),y:height*(-35/100)},10)
 		.transition({opacity:1},100).transition({x:0,y:0,scale:1.5},1000,'snap')
 		.transition({opacity:0},100,function(){
 			$('#listBtn').show();
@@ -288,13 +286,13 @@ function skill4(site){
 		$('#Projectile').transition({rotate: '-135deg'},100);
 		$('#listBtn').hide(1,function(){
 			$('#Projectile').transition({opacity:1},100)
-			.transition({x:width*(15/100),y:height*(40/100)},1000,'easeInBack')
+			.transition({x:width*(35/100),y:height*(-40/100)},1000,'easeInBack')
 			.transition({opacity:0},100).transition({x:0,y:0},100);
 
 		});
 	}else{
 		$('#Projectile').transition({rotate: '45deg'},10);
-		$('#Projectile').transition({x:width*(-15/100),y:height*(-40/100)},10)
+		$('#Projectile').transition({x:width*(35/100),y:height*(-40/100)},10)
 		.transition({opacity:1},10)
 		.transition({x:0,y:0},1000,'easeInBack')
 		.transition({opacity:0},10,function(){
@@ -326,7 +324,7 @@ function skill6(site){
 		$('#Projectile').transition({rotate: '-180deg'},10);
 		$('#listBtn').hide(1,function(){
 			$('#Projectile').transition({opacity:1},10)
-			.transition({x:width*(-50/100),y:height*(35/100),rotate: '-180deg'},1000,'easeInBack')
+			.transition({x:width*(50/100),y:height*(-35/100),rotate: '-180deg'},1000,'easeInBack')
 			.transition({opacity:0},100).transition({x:0,y:0,rotate: '0deg'},10);
 		});
 	}else{

@@ -39,7 +39,7 @@ socket.on('battleRoomState',function(msg){
 		if(msg==1)
 			oppositeAtack();
 		if(msg==2)
-			oppositeSkill();
+			oppositeAtackUsingSkill();
 	});
 
 	// 處理使用者不接受戰鬥的情況

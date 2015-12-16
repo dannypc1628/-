@@ -125,6 +125,7 @@ function lose(){
 
 function setMonster(){
 	$('#user').attr("src","img/monster"+localStorage.leader+".png");
+	$('#enemy').attr("src","img/monster"+localStorage.oppositeMonster+".png");
 	userHP=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;
 	enemyHP=monsterList[localStorage.oppositeMonster].monsterHP+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].HPCoe;;
 	userHPMax=monsterList[localStorage.leader].monsterHP+localStorage.leaderLV*monsterList[localStorage.leader].HPCoe;

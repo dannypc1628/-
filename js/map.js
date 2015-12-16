@@ -95,6 +95,7 @@ function initialize() {
        getMonster(position.coords.latitude,position.coords.longitude);
        //送出socket使用者更新後的座標
        socket.emit('location',localStorage.userName,position.coords.latitude,position.coords.longitude);
+       console.log(localStorage.userName+"  "+position.coords.latitude+"  "+position.coords.longitude);
       tempLat = position.coords.latitude;
       tempLon = position.coords.longitude;
       }
@@ -261,8 +262,8 @@ function inviteBattle(otherUserName){
     var thisUserName = onlineUser[i]["username"];
     if(thisUserName == otherUserName){
       console.log("otherUserName == thisUserName");
-      socketPVP.emit('invited',onlineUser[i]["socketID"],localStorage.leader,localStorage.leaderLV);
-      console.log("socketPVP.emit(invited)"+onlineUser[i]["socketID"]);
+      socket.emit('invited',onlineUser[i]["socketID"],localStorage.leader,localStorage.leaderLV);
+      console.log("socket  PVP  emit(invited)"+onlineUser[i]["socketID"]);
       //自己是被自己邀請
       localStorage.whoInvitedYou = localStorage.oldSocketID; 
     }

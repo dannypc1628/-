@@ -9,6 +9,7 @@ var enemySkillAttack=10;
 var width=$(window).width();
 var height=$(window).height();
 $(document).ready(function(){
+	document.getElementById('pvpSound').play();
 	setMonster();
 	/*opening*/
 	setTimeout(function(){

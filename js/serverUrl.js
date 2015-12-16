@@ -6,7 +6,7 @@ var serverUrlEatMonster="http://andy-lin.info:20003/api/eatMonster";
 var serverUrlBattleWinGetNewMonster = "http://andy-lin.info:20003/api/addMonsterInBox";
 var serverUrlBattlePVPWin ;
 
-var serverUrlBattlePVPSovcket = "http://localhost:20005" ;
+var serverUrlBattlePVPSovcket = "http://andy-lin.info:20004" ;
 
 var serverUrlMapSocket = "http://andy-lin.info:20004";
 

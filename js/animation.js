@@ -110,7 +110,7 @@ function win(){
 	});
 	$('#enemy').transition({scale:0});
 	swal({
-		title: "Win",  
+		title: "YOU WIN",  
 
 		closeOnConfirm: false 
 	}, 
@@ -124,7 +124,7 @@ function lose(){
 	$('#listBtn').hide(1);
 	$('#user').transition({scale:0});
 	swal({
-		title: "LOSE",  
+		title: "YOU LOSE",  
 
 		closeOnConfirm: false 
 	}, 

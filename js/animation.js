@@ -96,7 +96,7 @@ $(document).ready(function(){
 });
 
 function win(){
-
+	$('#listBtn').hide(1);
 	$.ajax({
 		
 		type:"GET",
@@ -121,6 +121,7 @@ function win(){
 	
 }
 function lose(){
+	$('#listBtn').hide(1);
 	$('#user').transition({scale:0});
 	swal({
 		title: "LOSE",  
@@ -187,7 +188,7 @@ function userskl(){
 function enemyAtk(){
 	enemyAttack=monsterList[localStorage.oppositeMonster].monsterAttack
 		+localStorage.oppositeMonsterLV*monsterList[localStorage.oppositeMonster].AttackCoe;
-	if(Math.floor((Math.random() * 100) + 1)>100){
+	if(Math.floor((Math.random() * 100) + 1)>40){
 		$('#enemy').transition({x:width*(-30/100),y:height*(80/100), delay: 600},100,'ease')
 		.transition({x:width*(80/100),y:height*(-5/100)},500,'ease',function(){
 			$('#listBtn').show(1);

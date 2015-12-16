@@ -127,20 +127,42 @@ return resultIndex
           hostData = onlineUser[hostData]
           console.log("這是 "+hostData["username"]+" 的邀請");
           //確認的彈出視窗
-          accept = confirm("玩家名稱："+hostData["username"]+" 請求跟您決鬥")
-          if (accept){
-            //傳送接受戰鬥給Server
-            socket.emit('accept',host,localStorage.leader,localStorage.leaderLV);
-            localStorage.oppositeMonster = oppositeMonster;
-            localStorage.oppositeMonsterLV = oppositeMonsterLV;
-            localStorage.whoInvitedYou = host;
-            console.log("我接受戰鬥 "+localStorage.whoInvitedYou+" 的戰鬥邀請");
-          }
-          else{
-            //傳送不接受戰鬥給Server
-            socket.emit('unaccept',host)
-            console.log("我不接受戰鬥");
-          }
+          //accept = confirm("玩家名稱："+hostData["username"]+" 請求跟您決鬥")
+          swal({
+            title:'玩家名稱:'+hostData["username"]+ '請求跟您決鬥', 
+            
+            showCancelButton: true,
+          },function(isConfirm){   
+            if (isConfirm) {
+              //傳送接受戰鬥給Server
+              socket.emit('accept',host,localStorage.leader,localStorage.leaderLV);
+              localStorage.oppositeMonster = oppositeMonster;
+              localStorage.oppositeMonsterLV = oppositeMonsterLV;
+              localStorage.whoInvitedYou = host;
+              console.log("我接受戰鬥 "+localStorage.whoInvitedYou+" 的戰鬥邀請");
+              swal.close();
+            }
+            else{
+              //傳送不接受戰鬥給Server
+              socket.emit('unaccept',host)
+              console.log("我不接受戰鬥");
+              swal.close();
+            }
+
+          });
+          // if (accept){
+          //   //傳送接受戰鬥給Server
+          //   socket.emit('accept',host,localStorage.leader,localStorage.leaderLV);
+          //   localStorage.oppositeMonster = oppositeMonster;
+          //   localStorage.oppositeMonsterLV = oppositeMonsterLV;
+          //   localStorage.whoInvitedYou = host;
+          //   console.log("我接受戰鬥 "+localStorage.whoInvitedYou+" 的戰鬥邀請");
+          // }
+          // else{
+          //   //傳送不接受戰鬥給Server
+          //   socket.emit('unaccept',host)
+          //   console.log("我不接受戰鬥");
+          // }
         }
       });
       //雙方接受戰鬥，準備進入battlePVP.html
@@ -153,6 +175,16 @@ return resultIndex
         console.log("按此進入戰鬥了");
         accept=confirm("按此進入戰鬥");
         if(accept){
-          window.open('battlePVP.html');
+          window.open('battlePVP.html',"_self");
         }
+        // swal({
+        //     title:'按此進入戰鬥了', 
+            
+        //     showCancelButton: false,
+        //   },function(){   
+            
+        //       window.open('battlePVP.html',"_self");
+            
+
+        //   });
       });

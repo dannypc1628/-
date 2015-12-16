@@ -15,10 +15,11 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$('#wrapMain').transition({opacity:1},450,
 		function(){
-			$('#user').transition({scale:0.5,x:-250,y:-300}).transition({ rotateY: '180deg'});
-			$('#enemy').transition({scale:0.5,x:900,y:-70});
+			$('#user').transition({scale:0.5,x:width*(-25/100),y:height*(-10/100)})
+				.transition({ rotateY: '180deg'});
+			$('#enemy').transition({scale:0.5,x:width*(80/100),y:height*(-5/100)});
 			$('.HP').transition({opacity:1},800);
-			$('#Projectile').transition({rotate: '-180deg'},100);
+			$('#listBtn').show();
 		});
 	});
 	/*己方攻擊*/
@@ -100,23 +101,23 @@ function win(){
 	// });
 	$('#enemy').transition({scale:0});
 	swal({
-		title: "Win",  
+		title: "YOU WIN",  
 
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	window.open('testMap.html', '_self', ''); window.close();
+      	window.open('testMap.html', '_self', ''); 
     });
 	
 }
 function lose(){
 	swal({
-		title: "lose",  
+		title: "YOU LOSE",  
 
 		closeOnConfirm: false 
 	}, 
 	function(){   
-      	window.open('testMap.html', '_self', ''); window.close();
+      	window.open('testMap.html', '_self', ''); 
     });
 
 

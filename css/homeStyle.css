@@ -1,8 +1,11 @@
 #topBar{
 	text-align:center ;
 }
-body{
-	background-color: gray;
+
+#body{
+	background-color: rgb(250,235,133);
+	background-image: url("../img/background.png");
+	background-size: 1080px,1920px;
 }
 #center{
 	text-align:center ;	

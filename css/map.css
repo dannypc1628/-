@@ -1,6 +1,8 @@
 body
 {
 	overflow: hidden;
+	background-color:rgb(250,235,133);
+	background-image: url("img/background.png");
 }
 html, body, #map-canvas 
 { 

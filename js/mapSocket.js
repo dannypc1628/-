@@ -41,7 +41,9 @@ var socket = io.connect(serverUrlMapSocket);//連上Socket.io Server
             Temp.push(otherUserLon);
             //push到資料表裡
             otherUserList.push(Temp);
-            console.log("TempPush進去"+Temp+"length==0 otherUserList="+otherUserList);    
+            console.log("TempPush進去"+Temp+"length==0 otherUserList="+otherUserList);
+            //廣播我的位置
+            socket.emit('location',localStorage.userName,position.coords.latitude,position.coords.longitude);    
           }
 
           //如果不是空的

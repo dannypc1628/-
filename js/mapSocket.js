@@ -64,7 +64,8 @@ var socket = io.connect(serverUrlMapSocket);//連上Socket.io Server
             }
             //如果不在裡面
             if(inTheList == 0){
-              
+              //送出我的位置
+              socket.emit('location',localStorage.userName,position.coords.latitude,position.coords.longitude);
               //push到資料表裡
               Temp=[];
               Temp.push(otherUserName);

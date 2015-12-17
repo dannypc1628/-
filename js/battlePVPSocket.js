@@ -49,7 +49,17 @@ socket.on('battleRoomState',function(msg){
 	})
 
 	socket.on("disconnect",function(socketID){
-		$("#"+socketID).remove()
+
+		$("#"+socketID).remove();
+
+			swal({
+		title: "對方連線中斷",  
+
+		closeOnConfirm: false 
+		}, 
+		function(){   
+      	window.open('testMap.html', '_self', ''); 
+    });
 	})
 
 

@@ -3,7 +3,9 @@ var initialLocation;
 
 var browserSupportFlag =  new Boolean();
 var monsterList = [];
-var otherUserList = new Array()
+var otherUserList = new Array();
+var otherUserMarkers = [];
+var otherUserInfowindows = [];
 var map;
 
 
@@ -98,6 +100,8 @@ function initialize() {
        console.log(localStorage.userName+"  "+position.coords.latitude+"  "+position.coords.longitude);
       tempLat = position.coords.latitude;
       tempLon = position.coords.longitude;
+      localStorage.oldLat = position.coords.latitude;
+      localStorage.oldLon = position.coords.longitude;
       }
 
       map.setCenter(pos);
@@ -221,16 +225,37 @@ var monsterListTest = [
 */
 
 
-var otherUserMarker;
+
 function setOtherUserMark(map,otherUserList,time){
   
-  if(time>0)
-    otherUserMarker.setMap(null);
+  if(time>0){
+  	for(var i = 0 ; i<otherUserMarkers.length;i++){
+  		otherUserMarkers[i].setMap(null);
+  		otherUserMarkers = [];
+  		otherUserInfowindows = [];
+
+  	}
+
+  }
+   
   
   console.log("time="+time)
   for(var i = 0;i<otherUserList.length;i++){
+  		var otherUserData = otherUserList[i];
+  		setOtherUserMaker(otherUserData,i);
+  }
 
-    var otherUserData = otherUserList[i];
+	for (var i = 0; i < otherUserMarkers.length; i++) {
+		otherUserMarkers[i].setMap(map);
+
+  }
+
+  
+}
+
+function setOtherUserMaker(otherUserData,i){
+
+    
     var otherUserName = "'"+otherUserData[0]+"'";
     var otherLocation = new google.maps.LatLng(otherUserData[1]+0.0001, otherUserData[2]+0.0001);
     var infowindow =new google.maps.InfoWindow({
@@ -238,18 +263,21 @@ function setOtherUserMark(map,otherUserList,time){
       position:otherLocation
     });
 
-    console.log("其他人marker  i="+i+" otherUserData="+otherUserData); 
-    otherUserMarker = new google.maps.Marker({
+    console.log("其他人marker  i= otherUserData="+otherUserData); 
+    var otherUserMarker = new google.maps.Marker({
     position: otherLocation,
     label: '其',
     map: map
     });
+    
 
-  }
-  google.maps.event.addListener(otherUserMarker, 'click' , function(){
+    otherUserMarkers.push(otherUserMarker);
+    otherUserInfowindows.push(infowindow);
+    
+    google.maps.event.addListener(otherUserMarkers[i], 'click' , function(){
       infowindow.open(map,otherUserMarker);
     });
-  
+
 }
 
 

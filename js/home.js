@@ -116,11 +116,12 @@
 		function goToMap(){
 			//$("#view").html("<iframe src=\"testMap.html\"></iframe>");
 			window.open('testMap.html','_self');
+			
 		}
 
 		function goToBox(){
 			$("#view").html("<iframe src=\"box.html\"></iframe>");
-					
+				
 		}
 
 		function goToMonsterList(){

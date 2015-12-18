@@ -52,14 +52,14 @@ socket.on('battleRoomState',function(msg){
 
 		$("#"+socketID).remove();
 
-			swal({
-		title: "對方連線中斷",  
+		// 	swal({
+		// title: "對方連線中斷",  
 
-		closeOnConfirm: false 
-		}, 
-		function(){   
-      	window.open('testMap.html', '_self', ''); 
-    });
-	})
+		// closeOnConfirm: false 
+		// }, 
+		// function(){   
+  //     	window.open('testMap.html', '_self', ''); 
+  //   });
+	});
 
 

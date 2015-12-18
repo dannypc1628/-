@@ -229,13 +229,13 @@ var monsterListTest = [
 function setOtherUserMark(map,otherUserList,time){
   
   if(time>0){
+  	console.log("time = "+time);
   	for(var i = 0 ; i<otherUserMarkers.length;i++){
   		otherUserMarkers[i].setMap(null);
-  		otherUserMarkers = [];
-  		otherUserInfowindows = [];
 
   	}
-
+  	otherUserMarkers = [];
+  		console.log("清除otherMarkers後的長度="+otherUserMarkers.length);
   }
    
   
